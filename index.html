@@ -1,0 +1,2013 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Algorithmia Documentation</title>
+
+    <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="javascripts/all.js" type="text/javascript"></script>
+
+      <script>
+        $(function() {
+          setupLanguages(["shell","cli","python","java","scala","javascript","nodejs","ruby","rust","r"]);
+        });
+      </script>
+
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+     ga('create', 'UA-38617973-1', 'auto');
+     ga('send', 'pageview');
+
+    </script>
+  </head>
+
+  <body class="index">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+        <div class="lang-selector">
+              <a href="#" data-language-name="shell">cURL</a>
+              <a href="#" data-language-name="cli">CLI</a>
+              <a href="#" data-language-name="python">python</a>
+              <a href="#" data-language-name="java">java</a>
+              <a href="#" data-language-name="scala">scala</a>
+              <a href="#" data-language-name="javascript">javascript</a>
+              <a href="#" data-language-name="nodejs">nodejs</a>
+              <a href="#" data-language-name="ruby">ruby</a>
+              <a href="#" data-language-name="rust">rust</a>
+              <a href="#" data-language-name="r">r</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+        <ul class="toc-footer">
+            <li><a href='https://algorithmia.com/'>Sign up for an Algorithmia Key</a></li>
+            <li><a href='http://github.com/tripit/slate'>Powered by Slate</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        
+          <h1 id="introduction">Introduction</h1>
+
+<p>Welcome to the Algorithmia API documentation! You can use the API to access any algorithm in the marketplace.</p>
+
+<p>We have clients &amp; libraries in multiple languages. We encourage you to click on the different language tabs at the top of the right-side pane to see code samples in your language of choice. </p>
+
+<p>This documentation will serve as a reference as you start to integrate the Algorithmia API into your code.</p>
+
+<p>If this is your first time trying Algorithmia, you might find it useful to start with our <a href="http://developers.algorithmia.com/basics/getting-started/">Getting Started guide</a>, which can be found alongside many other resources in the <a href="http://developers.algorithmia.com/">Algorithmia Developer Center</a>.</p>
+
+          <h1 id="authentication">Authentication</h1>
+
+<h2 id="api-keys">API Keys</h2>
+
+<blockquote>
+<p>To authorize, use this code:</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
+curl <span class="s2">"api_endpoint_here"</span> -H <span class="s1">'Authorization: Simple YOUR_API_KEY'</span>
+</code></pre>
+<pre class="highlight cli"><code><span class="gp">$ </span>algo auth
+Configuring authentication <span class="k">for</span> <span class="s1">'default'</span> profile
+Enter API Key <span class="o">(</span>prefixed with <span class="s1">'sim'</span><span class="o">)</span>: YOUR_API_KEY
+Profile is ready to use. Test with <span class="s1">'algo ls'</span>
+</code></pre>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">Algorithmia</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">Algorithmia</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s">'YOUR_API_KEY'</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight r"><code><span class="n">library</span><span class="p">(</span><span class="n">algorithmia</span><span class="p">)</span>
+
+<span class="n">client</span> <span class="o">&lt;-</span> <span class="n">Algorithmia</span><span class="o">$</span><span class="n">client</span><span class="p">(</span><span class="s1">'YOUR_API_KEY'</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'algorithmia'</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="no">Algorithmia</span><span class="p">.</span><span class="nf">client</span><span class="p">(</span><span class="s1">'YOUR_API_KEY'</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight java"><code><span class="kn">import</span> <span class="nn">com.algorithmia.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.algorithmia.algo.*</span><span class="o">;</span>
+
+<span class="n">AlgorithmiaClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">Algorithmia</span><span class="o">.</span><span class="na">client</span><span class="o">(</span><span class="s">"YOUR_API_KEY"</span><span class="o">);</span>
+</code></pre>
+<pre class="highlight scala"><code><span class="k">import</span> <span class="nn">com.algorithmia._</span>
+<span class="k">import</span> <span class="nn">com.algorithmia.algo._</span>
+
+<span class="k">val</span> <span class="n">client</span> <span class="k">=</span> <span class="nc">Algorithmia</span><span class="o">.</span><span class="n">client</span><span class="o">(</span><span class="s">"YOUR_API_KEY"</span><span class="o">)</span>
+</code></pre>
+<pre class="highlight rust"><code><span class="k">extern</span> <span class="n">crate</span> <span class="n">algorithmia</span>
+<span class="k">use</span> <span class="nn">algorithmia</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">algorithmia</span><span class="p">::</span><span class="nn">algo</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
+
+<span class="k">let</span> <span class="n">client</span> <span class="o">=</span> <span class="nn">Algorithmia</span><span class="p">::</span><span class="nf">client</span><span class="p">(</span><span class="s">"YOUR_API_KEY"</span><span class="p">);</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="c1">// include the algorithmia.js library</span>
+<span class="c1">// https://algorithmia.com/v1/clients/js/algorithmia-0.2.0.js</span>
+
+<span class="kd">var</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">Algorithmia</span><span class="p">.</span><span class="nx">client</span><span class="p">(</span><span class="s1">'YOUR_API_KEY'</span><span class="p">);</span>
+</code></pre>
+<pre class="highlight nodejs"><code><span class="kd">var</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">Algorithmia</span><span class="p">.</span><span class="nx">client</span><span class="p">(</span><span class="s1">'YOUR_API_KEY'</span><span class="p">);</span>
+</code></pre>
+
+<blockquote>
+<p>Make sure to replace <code class="prettyprint">YOUR_API_KEY</code> with your API key.</p>
+</blockquote>
+
+<p>API requests are authenticated by a key which can be found and managed from your user profile.
+With every call to the API, the user must be authenticated. The API has a simple means to do this by passing in your key as an HTTP &ldquo;Authorization&rdquo; header with the request.</p>
+
+<p>When you signed up for Algorithmia, a &lsquo;default-key&rsquo; was generated for your convenience. This is the key that is used throughout the example code within algorithm pages. For these examples to work correctly, this default key must exist with all the permissions, otherwise the usage examples may result in a 401 Unauthorized error.</p>
+
+<aside class="notice">
+You must replace <code>YOUR_API_KEY</code> with your personal API key.
+</aside>
+
+<h2 id="key-restrictions">Key Restrictions</h2>
+
+<p>Algorithmia provides you with fine-grained controls for restricting what API calls can be made with a specific key from the Credentials section of your user profile.</p>
+
+<p>You can create or modify any key to include any or all of the following restrictions:</p>
+
+<ul>
+<li><strong>Algorithm access</strong>: a white list of specific algorithms that can be called</li>
+<li><strong>Native Clients</strong>: allow the key to be used in any request that didn&rsquo;t originate from a web browser (non-CORS)</li>
+<li><strong>Web Browser</strong>: allows the key to be used for cross-origin requests (CORS). This is required for any key that you embed on your site. If you intend to embed this key in your site, we recommend that you disallow data access and white list only the algorithms that your site calls.</li>
+<li><strong>Restrict referrer hostname</strong>: only allow cross-origin requests from a specific domain. This is recommended when embedding your API key in your site.</li>
+<li><strong>Data access</strong>: control the Data API read/write access for a key. Note that this restriction does not prevent an algorithm from using the Data API. See the Data API documentation for details on further managing permissions of your data.</li>
+</ul>
+
+          <h1 id="api-specification">API Specification</h1>
+
+<p>The Algorithmia API gives developers the ability to build applications that interact with and use all the features of Algorithmia in an automated fashion. Tasks can be generated, work can be ordered, and your application can be notified as data is processed by Algorithmia.</p>
+
+<p>Requests to the API must be formatted in JSON. We follow the <a href="http://www.jsonrpc.org/specification">JSON-RPC 2.0 spec</a>.</p>
+
+<p>A properly formatted request will always return the HTTP status code <code class="prettyprint">200 OK</code>; with either a <code class="prettyprint">result</code> field (which may be null in some cases) for successes or an <code class="prettyprint">error</code> field to indicate failure.</p>
+
+<p>The size limit for a request is 10MiB. Check out the <a href="#the-data-api">Data API</a> for options on how to process larger files.</p>
+
+<h2 id="call-an-algorithm">Call an Algorithm</h2>
+<pre class="highlight shell"><code>curl -X POST -H <span class="s1">'Authorization: Simple YOUR_API_KEY'</span> <span class="se">\</span>
+    -d <span class="s1">'YOUR_NAME'</span> -H <span class="s1">'Content-Type: text/plain'</span> <span class="se">\</span>
+    https://api.algorithmia.com/v1/algo/demo/Hello/0.1.1
+</code></pre>
+<pre class="highlight cli"><code><span class="gp">$ </span>algo run -d <span class="s1">'YOUR_NAME'</span> demo/Hello/0.1.1
+Hello YOUR_NAME
+</code></pre>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">Algorithmia</span>
+
+<span class="nb">input</span> <span class="o">=</span> <span class="s">"YOUR_NAME"</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">Algorithmia</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s">'YOUR_API_KEY'</span><span class="p">)</span>
+<span class="c"># Pass in the unique algoUrl path found on each algorithm description page.</span>
+<span class="n">algo</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">algo</span><span class="p">(</span><span class="s">'demo/Hello/0.1.1'</span><span class="p">)</span>
+<span class="c"># Calls an algorithm with the input provided.</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">algo</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+
+<span class="c"># If you are using the 1.0+ client you can access both the output and the metadata.</span>
+<span class="k">print</span> <span class="n">result</span><span class="o">.</span><span class="n">result</span>    <span class="c"># Hello YOUR_NAME</span>
+<span class="k">print</span> <span class="n">result</span><span class="o">.</span><span class="n">metadata</span>  <span class="c"># Metadata(content_type='text',duration=0.0002127)</span>
+
+<span class="c"># If you are using 0.9.x you can only get the algorithm output</span>
+<span class="k">print</span> <span class="n">result</span>   <span class="c"># Hello YOUR_NAME</span>
+
+<span class="c"># There are many other features missing in 0.9.x, to upgrade see the github docs.</span>
+</code></pre>
+<pre class="highlight r"><code><span class="n">library</span><span class="p">(</span><span class="n">algorithmia</span><span class="p">)</span>
+
+<span class="n">input</span> <span class="o">&lt;-</span> <span class="s2">"YOUR_NAME"</span>
+<span class="n">client</span> <span class="o">&lt;-</span> <span class="n">Algorithmia</span><span class="o">$</span><span class="n">client</span><span class="p">(</span><span class="s1">'YOUR_API_KEY'</span><span class="p">)</span>
+<span class="n">algo</span> <span class="o">&lt;-</span> <span class="n">client</span><span class="o">$</span><span class="n">algo</span><span class="p">(</span><span class="s1">'demo/Hello/0.1.1'</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">&lt;-</span> <span class="n">algo</span><span class="o">$</span><span class="n">pipe</span><span class="p">(</span><span class="n">input</span><span class="p">)</span><span class="o">$</span><span class="n">result</span>
+<span class="n">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'algorithmia'</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="no">Algorithmia</span><span class="p">.</span><span class="nf">client</span><span class="p">(</span><span class="s1">'YOUR_API_KEY'</span><span class="p">)</span>
+<span class="n">algo</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">algo</span><span class="p">(</span><span class="s1">'demo/Hello/0.1.1'</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">algo</span><span class="p">.</span><span class="nf">pipe</span><span class="p">(</span><span class="s1">'YOUR_NAME'</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">result</span>
+</code></pre>
+<pre class="highlight java"><code><span class="kn">import</span> <span class="nn">com.algorithmia.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.algorithmia.algo.*</span><span class="o">;</span>
+
+<span class="n">String</span> <span class="n">input</span> <span class="o">=</span> <span class="s">"\"YOUR_NAME\""</span><span class="o">;</span>
+<span class="n">AlgorithmiaClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">Algorithmia</span><span class="o">.</span><span class="na">client</span><span class="o">(</span><span class="s">"YOUR_API_KEY"</span><span class="o">);</span>
+<span class="n">Algorithm</span> <span class="n">algo</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">algo</span><span class="o">(</span><span class="s">"algo://demo/Hello/0.1.1"</span><span class="o">);</span>
+<span class="n">AlgoResponse</span> <span class="n">result</span> <span class="o">=</span> <span class="n">algo</span><span class="o">.</span><span class="na">pipeJson</span><span class="o">(</span><span class="n">input</span><span class="o">);</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">result</span><span class="o">.</span><span class="na">asJsonString</span><span class="o">());</span>
+</code></pre>
+<pre class="highlight scala"><code><span class="k">import</span> <span class="nn">com.algorithmia._</span>
+<span class="k">import</span> <span class="nn">com.algorithmia.algo._</span>
+
+<span class="k">val</span> <span class="n">input</span> <span class="k">=</span> <span class="s">"YOUR_NAME"</span>
+<span class="k">val</span> <span class="n">client</span> <span class="k">=</span> <span class="nc">Algorithmia</span><span class="o">.</span><span class="n">client</span><span class="o">(</span><span class="s">"YOUR_API_KEY"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">algo</span> <span class="k">=</span> <span class="n">client</span><span class="o">.</span><span class="n">algo</span><span class="o">(</span><span class="s">"algo://demo/Hello/0.1.1"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">result</span> <span class="k">=</span> <span class="n">algo</span><span class="o">.</span><span class="n">pipeJson</span><span class="o">(</span><span class="n">input</span><span class="o">)</span>
+<span class="nc">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="o">(</span><span class="n">result</span><span class="o">.</span><span class="n">asJsonString</span><span class="o">)</span>
+</code></pre>
+<pre class="highlight rust"><code><span class="k">use</span> <span class="nn">algorithmia</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">algorithmia</span><span class="p">::</span><span class="nn">algo</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
+
+<span class="k">let</span> <span class="n">input</span> <span class="o">=</span> <span class="s">"YOUR_NAME"</span><span class="p">;</span>
+<span class="k">let</span> <span class="n">client</span> <span class="o">=</span> <span class="nn">Algorithmia</span><span class="p">::</span><span class="nf">client</span><span class="p">(</span><span class="s">"YOUR_API_KEY"</span><span class="p">);</span>
+<span class="k">let</span> <span class="n">algo</span> <span class="o">=</span> <span class="n">client</span><span class="nf">.algo</span><span class="p">(</span><span class="s">"algo://demo/Hello/0.1.1"</span><span class="p">);</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="c1">// include the algorithmia.js library</span>
+<span class="c1">// https://algorithmia.com/v1/clients/js/algorithmia-0.2.0.js</span>
+
+<span class="kd">var</span> <span class="nx">input</span> <span class="o">=</span> <span class="s2">"YOUR_NAME"</span><span class="p">;</span>
+<span class="nx">Algorithmia</span><span class="p">.</span><span class="nx">client</span><span class="p">(</span><span class="s2">"YOUR_API_KEY"</span><span class="p">);</span>
+
+<span class="nx">client</span><span class="p">.</span><span class="nx">algo</span><span class="p">(</span><span class="s2">"algo://demo/Hello/0.1.1"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">input</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">output</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">output</span><span class="p">);</span>
+      <span class="p">});</span>
+</code></pre>
+<pre class="highlight nodejs"><code><span class="kd">var</span> <span class="nx">algorithmia</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"algorithmia"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">input</span> <span class="o">=</span> <span class="s2">"YOUR_NAME"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">algorithmia</span><span class="p">.</span><span class="nx">client</span><span class="p">(</span><span class="s2">"YOUR_API_KEY"</span><span class="p">);</span>
+
+<span class="nx">client</span><span class="p">.</span><span class="nx">algo</span><span class="p">(</span><span class="s2">"algo://demo/Hello/0.1.1"</span><span class="p">)</span>
+       <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">input</span><span class="p">)</span>
+       <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">get</span><span class="p">());</span>
+       <span class="p">});</span>
+</code></pre>
+
+<blockquote>
+<p>Make sure to replace <code class="prettyprint">YOUR_NAME</code> with your name &amp; <code class="prettyprint">YOUR_API_KEY</code> with your API key.</p>
+</blockquote>
+
+<p>For each algorithm on the marketplace, you&rsquo;ll find an owner (the user who created the algorithm), an algorithm name, and a version number.
+Algorithms are called using this HTTP endpoint:</p>
+
+<p><code class="prettyprint">POST https://api.algorithmia.com/v1/algo/:owner/:algoname/[:version]</code></p>
+
+<p>Specifying a version is recommended, but optional. If not specified, the latest publicly published version will be used.
+When explicitly specifying a version, the following following formats are accepted:</p>
+
+<table><thead>
+<tr>
+<th>Version</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">1.1.1</code></td>
+<td>Fully specified version</td>
+</tr>
+<tr>
+<td><code class="prettyprint">1.2.*</code></td>
+<td>Specified to the minor level. Will resolve to the latest publicly published version with a minor version of 1.2</td>
+</tr>
+<tr>
+<td><code class="prettyprint">1.*</code></td>
+<td>Specified to a major version. Will resolve to the latest publicly published version with major version 1</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+To call private versions of an algorithm you own, you must use a fully specified semantic version or a version hash
+</aside>
+
+<h2 id="input-output">Input/Output</h2>
+
+<blockquote>
+<p>Text Input/Output</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST -H <span class="s1">'Authorization: Simple YOUR_API_KEY'</span> <span class="se">\</span>
+    -d <span class="s1">'HAL 9000'</span> -H <span class="s1">'Content-Type: text/plain'</span> <span class="se">\</span>
+    https://api.algorithmia.com/v1/algo/demo/Hello/0.1.1
+
+<span class="gp">-&gt; </span><span class="o">{</span>
+    <span class="s2">"result"</span>:<span class="s2">"Hello HAL 9000"</span>,
+    <span class="s2">"metadata"</span>:<span class="o">{</span><span class="s2">"content_type"</span>:<span class="s2">"text"</span>,<span class="s2">"duration"</span>:0.034232617<span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+<pre class="highlight cli"><code><span class="gp">$ </span>algo run demo/Hello/0.1.1 -d <span class="s1">'HAL 9000'</span>
+Hello HAL 9000
+</code></pre>
+<pre class="highlight python"><code><span class="n">algo</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">algo</span><span class="p">(</span><span class="s">'demo/Hello/0.1.1'</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">algo</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="s">"HAL 9000"</span><span class="p">)</span><span class="o">.</span><span class="n">result</span>
+<span class="c"># -&gt; Hello HAL 9000</span>
+</code></pre>
+<pre class="highlight r"><code><span class="n">algo</span> <span class="o">&lt;-</span> <span class="n">client</span><span class="o">$</span><span class="n">algo</span><span class="p">(</span><span class="s1">'demo/Hello/0.1.1'</span><span class="p">)</span>
+<span class="n">print</span><span class="p">(</span><span class="n">algo</span><span class="o">$</span><span class="n">pipe</span><span class="p">(</span><span class="s2">"HAL 9000"</span><span class="p">)</span><span class="o">$</span><span class="n">result</span><span class="p">)</span>
+<span class="c1"># -&gt; Hello HAL 9000
+</span></code></pre>
+<pre class="highlight ruby"><code><span class="n">algo</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">algo</span><span class="p">(</span><span class="s1">'demo/Hello/0.1.1'</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">algo</span><span class="p">.</span><span class="nf">pipe</span><span class="p">(</span><span class="s1">'HAL 9000'</span><span class="p">).</span><span class="nf">result</span>
+<span class="c1"># -&gt; Hello HAL 900</span>
+</code></pre>
+<pre class="highlight java"><code><span class="n">Algorithm</span> <span class="n">algo</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">algo</span><span class="o">(</span><span class="s">"algo://demo/Hello/0.1.1"</span><span class="o">);</span>
+<span class="n">AlgoResponse</span> <span class="n">result</span> <span class="o">=</span> <span class="n">algo</span><span class="o">.</span><span class="na">pipe</span><span class="o">(</span><span class="s">"HAL 9000"</span><span class="o">);</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">result</span><span class="o">.</span><span class="na">asString</span><span class="o">());</span>
+<span class="c1">// -&gt; Hello HAL 9000</span>
+</code></pre>
+<pre class="highlight scala"><code><span class="k">val</span> <span class="n">algo</span> <span class="k">=</span> <span class="n">client</span><span class="o">.</span><span class="n">algo</span><span class="o">(</span><span class="s">"algo://demo/Hello/0.1.1"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">result</span> <span class="k">=</span> <span class="n">algo</span><span class="o">.</span><span class="n">pipe</span><span class="o">(</span><span class="s">"HAL 9000"</span><span class="o">)</span>
+<span class="nc">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="o">(</span><span class="n">result</span><span class="o">.</span><span class="n">asString</span><span class="o">)</span>
+<span class="c1">// -&gt; Hello HAL 9000
+</span></code></pre>
+<pre class="highlight rust"><code><span class="k">let</span> <span class="n">algo</span> <span class="o">=</span> <span class="n">client</span><span class="nf">.algo</span><span class="p">(</span><span class="s">"algo://demo/Hello/0.1.1"</span><span class="p">);</span>
+<span class="k">let</span> <span class="n">response</span> <span class="o">=</span> <span class="n">algo</span><span class="nf">.pipe</span><span class="p">(</span><span class="s">"HAL 9000"</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
+<span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">response</span><span class="nf">.as_string</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">());</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">client</span><span class="p">.</span><span class="nx">algo</span><span class="p">(</span><span class="s2">"algo://demo/Hello/0.1.1"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="s2">"HAL 9000"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">output</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">output</span><span class="p">.</span><span class="nx">result</span><span class="p">);</span>
+      <span class="p">});</span>
+<span class="c1">// -&gt; Hello HAL 9000</span>
+</code></pre>
+<pre class="highlight nodejs"><code><span class="nx">client</span><span class="p">.</span><span class="nx">algo</span><span class="p">(</span><span class="s2">"algo://demo/Hello/0.1.1"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="s2">"HAL 9000"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">get</span><span class="p">());</span>
+      <span class="p">});</span>
+<span class="c1">// -&gt; Hello HAL 9000</span>
+</code></pre>
+
+<blockquote>
+<p>JSON Input/Output (including serialized objects/arrays)</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST -H <span class="s1">'Authorization: Simple YOUR_API_KEY'</span> <span class="se">\</span>
+    -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+    -d <span class="s1">'["transformer", "terraforms", "retransform"]'</span> <span class="se">\</span>
+    https://api.algorithmia.com/v1/algo/WebPredict/ListAnagrams/0.1
+
+<span class="gp">-&gt; </span><span class="o">{</span>
+    <span class="s2">"result"</span>: <span class="o">[</span><span class="s2">"transformer"</span>,<span class="s2">"retransform"</span><span class="o">]</span>,
+    <span class="s2">"metadata"</span>:<span class="o">{</span><span class="s2">"content_type"</span>:<span class="s2">"json"</span>,<span class="s2">"duration"</span>:0.039351226<span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+<pre class="highlight cli"><code><span class="c"># -d automatically detects if input is valid JSON</span>
+<span class="gp">$ </span>algo run WebPredict/ListAnagrams/0.1 <span class="se">\</span>
+    -d <span class="s1">'["transformer", "terraforms", "retransform"]'</span>
+<span class="o">[</span><span class="s2">"transformer"</span>,<span class="s2">"retransform"</span><span class="o">]</span>
+</code></pre>
+<pre class="highlight python"><code><span class="n">algo</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">algo</span><span class="p">(</span><span class="s">'WebPredict/ListAnagrams/0.1.0'</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">algo</span><span class="o">.</span><span class="n">pipe</span><span class="p">([</span><span class="s">"transformer"</span><span class="p">,</span> <span class="s">"terraforms"</span><span class="p">,</span> <span class="s">"retransform"</span><span class="p">])</span><span class="o">.</span><span class="n">result</span>
+<span class="c"># -&gt; ["transformer","retransform"]</span>
+</code></pre>
+<pre class="highlight r"><code><span class="n">algo</span> <span class="o">&lt;-</span> <span class="n">client</span><span class="o">$</span><span class="n">algo</span><span class="p">(</span><span class="s1">'WebPredict/ListAnagrams/0.1.0'</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">&lt;-</span> <span class="n">algo</span><span class="o">$</span><span class="n">pipe</span><span class="p">([</span><span class="s2">"transformer"</span><span class="p">,</span> <span class="s2">"terraforms"</span><span class="p">,</span> <span class="s2">"retransform"</span><span class="p">])</span><span class="o">$</span><span class="n">result</span>
+<span class="c1"># Returns a list in R
+</span><span class="p">[[</span><span class="m">1</span><span class="p">]]</span>
+<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s2">"transformer"</span>
+
+<span class="p">[[</span><span class="m">2</span><span class="p">]]</span>
+<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s2">"retransform"</span>
+</code></pre>
+<pre class="highlight ruby"><code><span class="n">algo</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">algo</span><span class="p">(</span><span class="s1">'WebPredict/ListAnagrams/0.1.0'</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">algo</span><span class="p">.</span><span class="nf">pipe</span><span class="p">([</span><span class="s2">"transformer"</span><span class="p">,</span> <span class="s2">"terraforms"</span><span class="p">,</span> <span class="s2">"retransform"</span><span class="p">]).</span><span class="nf">result</span>
+<span class="c1"># -&gt; ["transformer","retransform"]</span>
+</code></pre>
+<pre class="highlight java"><code><span class="n">Algorithm</span> <span class="n">algo</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">algo</span><span class="o">(</span><span class="s">"algo://WebPredict/ListAnagrams/0.1.0"</span><span class="o">);</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">words</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">((</span><span class="s">"transformer"</span><span class="o">,</span> <span class="s">"terraforms"</span><span class="o">,</span> <span class="s">"retransform"</span><span class="o">);</span>
+<span class="n">AlgoResponse</span> <span class="n">result</span> <span class="o">=</span> <span class="n">algo</span><span class="o">.</span><span class="na">pipe</span><span class="o">(</span><span class="n">words</span><span class="o">);</span>
+<span class="c1">// WebPredict/ListAnagrams returns an array of strings, so cast the result:</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">anagrams</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="na">as</span><span class="o">(</span><span class="k">new</span> <span class="n">TypeToken</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;(){});</span>
+<span class="c1">// -&gt; List("transformer", "retransform")</span>
+
+<span class="c1">// Or using raw JSON</span>
+<span class="n">String</span> <span class="n">jsonWords</span> <span class="o">=</span> <span class="s">"[\"transformer\", \"terraforms\", \"retransform\"]"</span>
+<span class="n">AlgoResponse</span> <span class="n">result2</span> <span class="o">=</span> <span class="n">algo</span><span class="o">.</span><span class="na">pipeJson</span><span class="o">(</span><span class="n">jsonWords</span><span class="o">);</span>
+<span class="n">String</span> <span class="n">anagrams</span> <span class="o">=</span> <span class="n">result2</span><span class="o">.</span><span class="na">asJsonString</span><span class="o">();</span>
+<span class="c1">// -&gt; "[\"transformer\", \"retransform\"]"</span>
+</code></pre>
+<pre class="highlight scala"><code><span class="k">val</span> <span class="n">algo</span> <span class="k">=</span> <span class="n">client</span><span class="o">.</span><span class="n">algo</span><span class="o">(</span><span class="s">"algo://WebPredict/ListAnagrams/0.1.0"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">result</span> <span class="k">=</span> <span class="n">algo</span><span class="o">.</span><span class="n">pipe</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="s">"transformer"</span><span class="o">,</span> <span class="s">"terraforms"</span><span class="o">,</span> <span class="s">"retransform"</span><span class="o">))</span>
+<span class="c1">// WebPredict/ListAnagrams returns an array of strings, so cast the result:
+</span><span class="k">val</span> <span class="n">anagrams</span> <span class="k">=</span> <span class="n">result</span><span class="o">.</span><span class="n">as</span><span class="o">(</span><span class="k">new</span> <span class="nc">TypeToken</span><span class="o">&lt;</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;&gt;(){})</span>
+<span class="c1">// -&gt; List("transformer", "retransform")
+</span>
+<span class="c1">// Or using raw JSON
+</span><span class="k">val</span> <span class="n">result2</span> <span class="k">=</span> <span class="n">algo</span><span class="o">.</span><span class="n">pipeJson</span><span class="o">(</span><span class="s">"""["transformer", "terraforms", "retransform"]"""</span><span class="o">)</span>
+<span class="nc">String</span> <span class="n">anagrams</span> <span class="k">=</span> <span class="n">result</span><span class="o">.</span><span class="n">asJsonString</span><span class="o">();</span>
+<span class="c1">// -&gt; "[\"transformer\", \"retransform\"]"
+</span></code></pre>
+<pre class="highlight rust"><code><span class="k">let</span> <span class="n">algo</span> <span class="o">=</span> <span class="n">client</span><span class="nf">.algo</span><span class="p">(</span><span class="s">"algo://WebPredict/ListAnagrams/0.1.0"</span><span class="p">);</span>
+<span class="k">let</span> <span class="n">response</span> <span class="o">=</span> <span class="n">algo</span><span class="nf">.pipe</span><span class="p">(</span><span class="nd">vec!</span><span class="p">[</span><span class="s">"transformer"</span><span class="p">,</span> <span class="s">"terraforms"</span><span class="p">,</span> <span class="s">"retransform"</span><span class="p">])</span><span class="nf">.unwrap</span><span class="p">();</span>
+<span class="k">let</span> <span class="n">output</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">response</span><span class="nf">.decode</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">();</span>
+<span class="c">// -&gt; ["transformer", "retransform"] as Vec&lt;String&gt;</span>
+
+<span class="c">// Or working with raw JSON</span>
+<span class="k">let</span> <span class="n">response2</span> <span class="o">=</span> <span class="n">algo</span><span class="nf">.pipe_json</span><span class="p">(</span><span class="n">r</span><span class="err">#</span><span class="s">"["</span><span class="n">transformer</span><span class="s">", "</span><span class="n">terraforms</span><span class="s">", "</span><span class="n">retransform</span><span class="s">"]"</span><span class="err">#</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
+<span class="k">let</span> <span class="n">output</span> <span class="o">=</span> <span class="n">response2</span><span class="nf">.as_json</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">()</span><span class="nf">.to_string</span><span class="p">();</span>
+<span class="c">// -&gt; "[\"transformer\", \"retransform\"]"</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">client</span><span class="p">.</span><span class="nx">algo</span><span class="p">(</span><span class="s2">"algo://WebPredict/ListAnagrams/0.1.0"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">pipe</span><span class="p">([</span><span class="s2">"transformer"</span><span class="p">,</span> <span class="s2">"terraforms"</span><span class="p">,</span> <span class="s2">"retransform"</span><span class="p">])</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">output</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">output</span><span class="p">.</span><span class="nx">result</span><span class="p">);</span>
+        <span class="c1">// -&gt; ["transformer","retransform"]</span>
+      <span class="p">});</span>
+
+<span class="c1">// Or using raw JSON</span>
+<span class="nx">client</span><span class="p">.</span><span class="nx">algo</span><span class="p">(</span><span class="s2">"algo://WebPredict/ListAnagrams/0.1.0"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">pipeJson</span><span class="p">(</span><span class="s1">'["transformer", "terraforms", "retransform"]'</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">output</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">output</span><span class="p">.</span><span class="nx">result</span><span class="p">);</span>
+        <span class="c1">// -&gt; ["transformer","retransform"]</span>
+      <span class="p">});</span>
+</code></pre>
+<pre class="highlight nodejs"><code><span class="nx">client</span><span class="p">.</span><span class="nx">algo</span><span class="p">(</span><span class="s2">"algo://WebPredict/ListAnagrams/0.1.0"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">pipe</span><span class="p">([</span><span class="s2">"transformer"</span><span class="p">,</span> <span class="s2">"terraforms"</span><span class="p">,</span> <span class="s2">"retransform"</span><span class="p">])</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">get</span><span class="p">());</span>
+        <span class="c1">// -&gt; ["transformer","retransform"]</span>
+      <span class="p">});</span>
+
+<span class="c1">// Or using raw JSON</span>
+<span class="nx">client</span><span class="p">.</span><span class="nx">algo</span><span class="p">(</span><span class="s2">"algo://WebPredict/ListAnagrams/0.1.0"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">pipeJson</span><span class="p">(</span><span class="s1">'["transformer", "terraforms", "retransform"]'</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">get</span><span class="p">());</span>
+        <span class="c1">// -&gt; ["transformer","retransform"]</span>
+      <span class="p">});</span>
+</code></pre>
+
+<blockquote>
+<p>Binary Input/Output</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="c"># Save output to bender_thumb.png since consoles don't handle printing binary well</span>
+curl -X POST -H <span class="s1">'Authorization: Simple YOUR_API_KEY'</span> <span class="se">\</span>
+    -H <span class="s1">'Content-Type: application/octet-stream'</span> <span class="se">\</span>
+    --data-binary @bender.jpg <span class="se">\</span>
+    -o bender_thumb.png <span class="se">\</span>
+    https://api.algorithmia.com/v1/algo/opencv/SmartThumbnail/0.1
+</code></pre>
+<pre class="highlight cli"><code><span class="c"># -D reads input from a file</span>
+<span class="c"># -o saves output to a file since consoles don't print binary well</span>
+<span class="gp">$ </span>algo run opencv/SmartThumbnail/0.1 -D bender.jpg -o bender_thumb.png
+Completed <span class="k">in </span>1.1 seconds
+</code></pre>
+<pre class="highlight python"><code><span class="nb">input</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s">"/path/to/bender.png"</span><span class="p">,</span> <span class="s">"rb"</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">algo</span><span class="p">(</span><span class="s">"opencv/SmartThumbnail/0.1"</span><span class="p">)</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span><span class="o">.</span><span class="n">result</span>
+<span class="c"># -&gt; [binary byte sequence]</span>
+</code></pre>
+<pre class="highlight r"><code><span class="n">algo</span> <span class="o">&lt;-</span> <span class="n">client</span><span class="o">$</span><span class="n">algo</span><span class="p">(</span><span class="s2">"opencv/SmartThumbnail/0.1"</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">&lt;-</span> <span class="n">algo</span><span class="o">$</span><span class="n">pipe</span><span class="p">(</span><span class="n">input</span><span class="p">)</span><span class="o">$</span><span class="n">result</span>
+<span class="c1"># -&gt; [raw vector]
+</span></code></pre>
+<pre class="highlight ruby"><code><span class="n">input</span> <span class="o">=</span> <span class="no">File</span><span class="p">.</span><span class="nf">binread</span><span class="p">(</span><span class="s2">"/path/to/bender.png"</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">algo</span><span class="p">(</span><span class="s2">"opencv/SmartThumbnail/0.1"</span><span class="p">).</span><span class="nf">pipe</span><span class="p">(</span><span class="n">input</span><span class="p">).</span><span class="nf">result</span>
+<span class="c1"># -&gt; [ASCII-8BIT string of binary data]</span>
+</code></pre>
+<pre class="highlight java"><code><span class="kt">byte</span><span class="o">[]</span> <span class="n">input</span> <span class="o">=</span> <span class="n">Files</span><span class="o">.</span><span class="na">readAllBytes</span><span class="o">(</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"/path/to/bender.jpg"</span><span class="o">).</span><span class="na">toPath</span><span class="o">());</span>
+<span class="n">AlgoResponse</span> <span class="n">result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">algo</span><span class="o">(</span><span class="s">"opencv/SmartThumbnail/0.1"</span><span class="o">).</span><span class="na">pipe</span><span class="o">(</span><span class="n">input</span><span class="o">);</span>
+<span class="kt">byte</span><span class="o">[]</span> <span class="n">buffer</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="na">as</span><span class="o">(</span><span class="k">new</span> <span class="n">TypeToken</span><span class="o">&lt;</span><span class="kt">byte</span><span class="o">[]&gt;(){});</span>
+<span class="c1">// -&gt; [byte array]</span>
+</code></pre>
+<pre class="highlight scala"><code><span class="n">let</span> <span class="n">input</span> <span class="k">=</span> <span class="nc">Files</span><span class="o">.</span><span class="n">readAllBytes</span><span class="o">(</span><span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"/path/to/bender.jpg"</span><span class="o">).</span><span class="n">toPath</span><span class="o">())</span>
+<span class="n">let</span> <span class="n">result</span> <span class="k">=</span> <span class="n">client</span><span class="o">.</span><span class="n">algo</span><span class="o">(</span><span class="s">"opencv/SmartThumbnail/0.1"</span><span class="o">).</span><span class="n">pipe</span><span class="o">(</span><span class="n">input</span><span class="o">)</span>
+<span class="n">let</span> <span class="n">buffer</span> <span class="k">=</span> <span class="n">result</span><span class="o">.</span><span class="n">as</span><span class="o">(</span><span class="k">new</span> <span class="nc">TypeToken</span><span class="o">&lt;</span><span class="n">byte</span><span class="o">[]&gt;(){})</span>
+<span class="c1">// -&gt; [byte array]
+</span></code></pre>
+<pre class="highlight rust"><code><span class="k">let</span> <span class="k">mut</span> <span class="n">input</span> <span class="o">=</span> <span class="nn">Vec</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
+<span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="s">"/path/to/bender.jpg"</span><span class="p">)</span><span class="nf">.read_to_end</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="n">input</span><span class="p">);</span>
+<span class="k">let</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="nf">.algo</span><span class="p">(</span><span class="s">"opencv/SmartThumbnail/0.1"</span><span class="p">)</span><span class="nf">.pipe</span><span class="p">(</span><span class="o">&amp;</span><span class="n">input</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
+<span class="k">let</span> <span class="n">output</span> <span class="o">=</span> <span class="n">response</span><span class="nf">.as_bytes</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">();</span>
+<span class="c">// -&gt; Vec&lt;u8&gt;</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="cm">/*
+  Support for binary I/O in the javascript client is planned.
+  Contact us if you need this feature, and we'll prioritize it right away:
+  https://algorithmia.com/contact
+
+  Note: The NodeJS client does currently support binary I/O.
+*/</span>
+</code></pre>
+<pre class="highlight nodejs"><code><span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="s2">"/path/to/bender.jpg"</span><span class="p">);</span>
+<span class="nx">client</span><span class="p">.</span><span class="nx">algo</span><span class="p">(</span><span class="s2">"opencv/SmartThumbnail"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">buffer</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
+        <span class="c1">// -&gt; Buffer(...)</span>
+    <span class="p">});</span>
+</code></pre>
+
+<p>Algorithmia supports calling algorithms that use any combination of text, JSON, or binary as their input and output.</p>
+
+<p>Each client SDK provides idiomatic abstractions for calling algorithms
+using common native types and automatic serializization and deserialization where reasonable.
+See the code samples to the right for examples in the language of your choice.</p>
+
+<h4 id="http-input-specification">HTTP input specification</h4>
+
+<p>To specify input when making a raw HTTP request, the body of the request is the input to the algorithm you are calling.
+To specify the input type, set the <code class="prettyprint">Content-Type</code> header accordingly. These are</p>
+
+<table><thead>
+<tr>
+<th>Content-Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">application/json</code></td>
+<td>body specifies JSON input data (UTF-8 encoded)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">application/text</code></td>
+<td>body specifies text input data (UTF-8 encoded)</td>
+</tr>
+<tr>
+<td><code class="prettyprint">application/octet-stream</code></td>
+<td>body specifies binary input data (raw bytes)</td>
+</tr>
+</tbody></table>
+
+<h4 id="http-output-specification">HTTP output specification</h4>
+
+<p>The <code class="prettyprint">metadata.content_type</code> specifies which type of encoding the result element is in.</p>
+
+<table><thead>
+<tr>
+<th>Content-Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>void</td>
+<td>The result element is null</td>
+</tr>
+<tr>
+<td>text</td>
+<td>The result element is a JSON string using UTF-8 encoding</td>
+</tr>
+<tr>
+<td>json</td>
+<td>The result element is any valid JSON type</td>
+</tr>
+<tr>
+<td>binary</td>
+<td>The result element is a Base64 encoded binary data in a JSON String</td>
+</tr>
+</tbody></table>
+
+<h2 id="query-parameters">Query Parameters</h2>
+
+<blockquote>
+<p>Query Parameters</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST -H <span class="s1">'Authorization: Simple YOUR_API_KEY'</span> <span class="se">\</span>
+    -d <span class="s1">'HAL 9000'</span> -H <span class="s1">'Content-Type: text/plain'</span> <span class="se">\</span>
+    https://api.algorithmia.com/v1/algo/demo/Hello/0.1.1?timeout<span class="o">=</span>10
+</code></pre>
+<pre class="highlight cli"><code><span class="c"># use --timeout to set the call timeout</span>
+<span class="gp">$ </span>algo run demo/Hello/0.1.1 -d <span class="s1">'HAL 9000'</span> --timeout 10
+
+<span class="c"># use --debug to print STDOUT if available</span>
+<span class="gp">$ </span>algo run demo/Hello/0.1.1 -d <span class="s1">'HAL 9000'</span> --debug
+</code></pre>
+<pre class="highlight python"><code><span class="n">algo</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">algo</span><span class="p">(</span><span class="s">'demo/Hello/0.1.1'</span><span class="p">)</span><span class="o">.</span><span class="n">set_options</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">algo</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="s">"HAL 9000"</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">Algorithmia.algorithm</span> <span class="kn">import</span> <span class="n">OutputType</span>
+<span class="n">algo</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">algo</span><span class="p">(</span><span class="s">'demo/Hello/0.1.1'</span><span class="p">)</span><span class="o">.</span><span class="n">set_options</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="n">OutputType</span><span class="o">.</span><span class="n">raw</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight r"><code><span class="n">algo</span> <span class="o">&lt;-</span> <span class="n">client</span><span class="o">$</span><span class="n">algo</span><span class="p">(</span><span class="s1">'util/echo'</span><span class="p">)</span>
+<span class="n">algo</span><span class="o">$</span><span class="n">setOptions</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="m">40</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">FALSE</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">&lt;-</span> <span class="n">algo</span><span class="o">$</span><span class="n">pipe</span><span class="p">(</span><span class="s1">'HAL 9000'</span><span class="p">)</span><span class="o">$</span><span class="n">result</span>
+</code></pre>
+<pre class="highlight ruby"><code><span class="n">algo</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">algo</span><span class="p">(</span><span class="s1">'demo/Hello/0.1.1'</span><span class="p">).</span><span class="nf">set_timeout</span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nf">enable_stdout</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">algo</span><span class="p">.</span><span class="nf">pipe</span><span class="p">(</span><span class="s1">'HAL 9000'</span><span class="p">).</span><span class="nf">result</span>
+</code></pre>
+<pre class="highlight java"><code><span class="n">Algorithm</span> <span class="n">algo</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">algo</span><span class="o">(</span><span class="s">"algo://demo/Hello/0.1.1?timeout=10"</span><span class="o">);</span>
+<span class="n">AlgoResponse</span> <span class="n">result</span> <span class="o">=</span> <span class="n">algo</span><span class="o">.</span><span class="na">pipe</span><span class="o">(</span><span class="s">"HAL 9000"</span><span class="o">);</span>
+</code></pre>
+<pre class="highlight scala"><code><span class="k">val</span> <span class="n">algo</span> <span class="k">=</span> <span class="n">client</span><span class="o">.</span><span class="n">algo</span><span class="o">(</span><span class="s">"algo://demo/Hello/0.1.1?timeout=10"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">result</span> <span class="k">=</span> <span class="n">algo</span><span class="o">.</span><span class="n">pipe</span><span class="o">(</span><span class="n">input</span><span class="o">)</span>
+</code></pre>
+<pre class="highlight rust"><code><span class="k">let</span> <span class="k">mut</span> <span class="n">algo</span> <span class="o">=</span> <span class="n">client</span><span class="nf">.algo</span><span class="p">(</span><span class="s">"algo://demo/Hello/0.1.1"</span><span class="p">);</span>
+<span class="k">let</span> <span class="n">algo</span> <span class="o">=</span> <span class="n">algo</span><span class="nf">.timeout</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="nf">.enable_stdout</span><span class="p">();</span>
+<span class="k">let</span> <span class="n">response</span> <span class="o">=</span> <span class="n">algo</span><span class="nf">.pipe</span><span class="p">(</span><span class="n">input</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
+<span class="k">if</span> <span class="k">let</span> <span class="nf">Some</span><span class="p">(</span><span class="k">ref</span> <span class="n">stdout</span><span class="p">)</span> <span class="o">=</span> <span class="n">response</span><span class="py">.metadata.stdout</span> <span class="p">{</span>
+      <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">stdout</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">client</span><span class="p">.</span><span class="nx">algo</span><span class="p">(</span><span class="s2">"algo://demo/Hello/0.1.1?timeout=10"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="s2">"HAL 9000"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">output</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">output</span><span class="p">);</span>
+      <span class="p">});</span>
+</code></pre>
+<pre class="highlight nodejs"><code><span class="nx">client</span><span class="p">.</span><span class="nx">algo</span><span class="p">(</span><span class="s2">"algo://demo/Hello/0.1.1?timeout=10"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="s2">"HAL 9000"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">output</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">output</span><span class="p">);</span>
+      <span class="p">});</span>
+</code></pre>
+
+<p>The API also provides the following configurable parameters when calling an algorithm:</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>timeout</td>
+<td>number: Specifies a timeout for the call in seconds. default=300 (5min), max=3000 (50min)</td>
+</tr>
+<tr>
+<td>stdout</td>
+<td>boolean: Indicates algorithm stdout should be returned in the response metadata (ignored unless you are the algorithm owner)</td>
+</tr>
+<tr>
+<td>output</td>
+<td>raw</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li><p><code class="prettyprint">timeout={seconds}</code></p>
+
+<ul>
+<li>Specifies a timeout for the call in seconds</li>
+<li>The default timeout is 5 minutes</li>
+<li>The maximum configurable timeout is 50 minutes</li>
+</ul></li>
+<li><p><code class="prettyprint">stdout=true</code></p>
+
+<ul>
+<li>Returns the stdout that the algorithm produced during the call</li>
+<li>Will only display if the algorithm author initiates the call</li>
+</ul></li>
+<li><p><code class="prettyprint">output=raw</code></p>
+
+<ul>
+<li>Returns the result of the algorithm call without the JSON-RPC wrapper</li>
+<li>If the algorithm returned an error then an HTTP 400 status code will be used</li>
+</ul></li>
+<li><p><code class="prettyprint">output=void</code></p>
+
+<ul>
+<li>Returns immediately and does not wait for the algorithm to run</li>
+<li>The result of the algorithm will not be accessible; this is useful in some cases where an algorithm outputs to a <code class="prettyprint">data://</code> file with a long running time (see <a href="#the-data-api">The Data API</a> for more information)</li>
+</ul></li>
+</ul>
+
+<h2 id="error-handling">Error Handling</h2>
+
+<blockquote>
+<p>Error Handling</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST -H <span class="s1">'Authorization: Simple YOUR_API_KEY'</span> <span class="se">\</span>
+    -d <span class="s1">'[]'</span> -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+    https://api.algorithmia.com/v1/algo/demo/Hello/0.1.1
+
+<span class="gp">-&gt; </span><span class="o">{</span>
+    <span class="s2">"error"</span>:<span class="o">{</span>
+      <span class="s2">"message"</span>:<span class="s2">"apply() functions do not match input data"</span>,
+      <span class="s2">"stacktrace"</span>:<span class="s2">"apply() functions do not match input data"</span>
+    <span class="o">}</span>,
+    <span class="s2">"metadata"</span>:<span class="o">{</span><span class="s2">"duration"</span>:0.046542354<span class="o">}}</span>
+<span class="o">}</span>
+</code></pre>
+<pre class="highlight cli"><code><span class="gp">$ </span>algo run demo/Hello/0.1.1 -d <span class="s1">'[]'</span>
+API error: apply<span class="o">()</span> functions <span class="k">do </span>not match input data
+apply<span class="o">()</span> functions <span class="k">do </span>not match input data
+</code></pre>
+<pre class="highlight python"><code><span class="n">algo</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">algo</span><span class="p">(</span><span class="s">'demo/Hello/0.1.1'</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">algo</span><span class="o">.</span><span class="n">pipe</span><span class="p">([])</span><span class="o">.</span><span class="n">error</span><span class="o">.</span><span class="n">message</span>
+<span class="c"># -&gt; API error: apply() functions do not match input data</span>
+</code></pre>
+<pre class="highlight r"><code><span class="n">algo</span> <span class="o">&lt;-</span> <span class="n">client</span><span class="o">$</span><span class="n">algo</span><span class="p">(</span><span class="s1">'demo/Hello/0.1.1'</span><span class="p">)</span>
+<span class="n">algo</span><span class="o">$</span><span class="n">pipe</span><span class="p">(</span><span class="n">list</span><span class="p">())</span><span class="o">$</span><span class="n">error</span><span class="o">$</span><span class="n">message</span>
+<span class="c1"># -&gt; API error: apply() functions do not match input data
+</span></code></pre>
+<pre class="highlight ruby"><code><span class="n">algo</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">algo</span><span class="p">(</span><span class="s1">'demo/Hello/0.1.1'</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">algo</span><span class="p">.</span><span class="nf">pipe</span><span class="p">([]).</span><span class="nf">error</span><span class="p">.</span><span class="nf">message</span>
+<span class="c1"># -&gt; API error: apply() functions do not match input data</span>
+</code></pre>
+<pre class="highlight java"><code><span class="n">Algorithm</span> <span class="n">algo</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">algo</span><span class="o">(</span><span class="s">"algo://demo/Hello/0.1.1"</span><span class="o">);</span>
+<span class="n">AlgoResponse</span> <span class="n">result</span> <span class="o">=</span> <span class="n">algo</span><span class="o">.</span><span class="na">pipe</span><span class="o">([]);</span>
+<span class="k">try</span> <span class="o">{</span>
+  <span class="n">result</span><span class="o">.</span><span class="na">asString</span><span class="o">();</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">AlgorithmException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ex</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+<span class="o">}</span>
+<span class="c1">// -&gt; API error: apply() functions do not match input data</span>
+</code></pre>
+<pre class="highlight scala"><code><span class="k">val</span> <span class="n">algo</span> <span class="k">=</span> <span class="n">client</span><span class="o">.</span><span class="n">algo</span><span class="o">(</span><span class="s">"algo://demo/Hello/0.1.1"</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">result</span> <span class="k">=</span> <span class="n">algo</span><span class="o">.</span><span class="n">pipe</span><span class="o">(</span><span class="s">"HAL 9000"</span><span class="o">)</span>
+<span class="k">try</span> <span class="o">{</span>
+  <span class="n">result</span><span class="o">.</span><span class="n">asString</span><span class="o">();</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">{</span>
+  <span class="k">case</span> <span class="n">ex</span><span class="k">:</span> <span class="kt">AlgorithmException</span> <span class="o">=&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="o">(</span><span class="n">ex</span><span class="o">.</span><span class="n">getMessage</span><span class="o">)</span>
+<span class="o">}</span>
+<span class="c1">// -&gt; API error: apply() functions do not match input data
+</span></code></pre>
+<pre class="highlight rust"><code><span class="k">let</span> <span class="n">algo</span> <span class="o">=</span> <span class="n">client</span><span class="nf">.algo</span><span class="p">(</span><span class="s">"algo://demo/Hello/0.1.1"</span><span class="p">);</span>
+<span class="k">match</span> <span class="n">algo</span><span class="nf">.pipe</span><span class="p">(</span><span class="o">&amp;</span><span class="p">[])</span> <span class="p">{</span>
+    <span class="nf">Ok</span><span class="p">(</span><span class="n">response</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="p">{</span> <span class="cm">/* success */</span> <span class="p">},</span>
+    <span class="nf">Err</span><span class="p">(</span><span class="n">err</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="nd">println!</span><span class="p">(</span><span class="s">"error calling demo/Hello: {}"</span><span class="p">,</span> <span class="n">err</span><span class="p">),</span>
+<span class="p">}</span>
+<span class="c">// -&gt; error calling demo/Hello: apply() functions do not match input data</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">client</span><span class="p">.</span><span class="nx">algo</span><span class="p">(</span><span class="s2">"algo://demo/Hello/0.1.1"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="s2">"HAL 9000"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">output</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">output</span><span class="p">.</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">output</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+<span class="c1">// -&gt; API error: apply() functions do not match input data</span>
+</code></pre>
+<pre class="highlight nodejs"><code><span class="nx">client</span><span class="p">.</span><span class="nx">algo</span><span class="p">(</span><span class="s2">"algo://demo/Hello/0.1.1"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="s2">"HAL 9000"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+<span class="c1">// -&gt; API error: apply() functions do not match input data</span>
+</code></pre>
+
+<p>If an error occurs, the response will contain the following fields:</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>error.message</td>
+<td>The error message</td>
+</tr>
+<tr>
+<td>error.stacktrace</td>
+<td>(Optional) a stacktrace if the error occurred within the algorithm (only if caller has access to algorithm source)</td>
+</tr>
+</tbody></table>
+
+<p>Each client provides a language-specific solution for error handling. The examples on the right
+come from calling an algorithm that expects text input in it&rsquo;s implementation of the <code class="prettyprint">apply</code> entrypoint,
+but instead receives a JSON array as input.</p>
+
+          <h1 id="data-api-specification">Data API Specification</h1>
+<pre class="highlight javascript"><code><span class="cm">/*
+  The Javascript client does not currently have support for the Data API.
+  Contact us if you need this feature and we'll prioritize it right away:
+  https://algorithmia.com/contact
+
+  Note: The NodeJS client does currently support the Data API.
+*/</span>
+</code></pre>
+
+<p>The Algorithmia Data API provides a way of getting data into and out of algorithms
+with support for Algorithmia Hosted Data as well as working directly with data
+in your Dropbox account or Amazon S3 buckets.
+For an introduction to working with data from these different data sources,
+see the data portal guides <a href="http://developers.algorithmia.com/algorithm-development/data-sources/">for Algorithm Developers</a>
+or <a href="http://developers.algorithmia.com/application-development/data-sources/">for Application Developers</a>.</p>
+
+<h2 id="data-uri">Data URI</h2>
+
+<p>A Data URI uniquely identifies files and directories. A Data URI is composed of a protocol and a path (e.g. <code class="prettyprint">data://.my/photos</code>).
+Each connected data source has has a unique protocol. Supported protocols include:</p>
+
+<table><thead>
+<tr>
+<th>Protocol</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">data://</code></td>
+<td>Algorithmia hosted data</td>
+</tr>
+<tr>
+<td><code class="prettyprint">dropbox://</code></td>
+<td>Dropbox default connected account</td>
+</tr>
+<tr>
+<td><code class="prettyprint">s3://</code></td>
+<td>Amazon S3 default connected account</td>
+</tr>
+</tbody></table>
+
+<p>Additionally, if you connect multiple accounts from the same source,
+they can be uniquely identified by their label, e.g. <code class="prettyprint">dropbox+mylabel://</code>.</p>
+
+<p>The path part of a Data URI is understood in the context of each source:</p>
+
+<table><thead>
+<tr>
+<th>URI</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">data://.my/foo</code></td>
+<td>The <code class="prettyprint">foo</code> collection of your Algorithmia hosted data</td>
+</tr>
+<tr>
+<td><code class="prettyprint">dropbox://foo</code></td>
+<td>The <code class="prettyprint">foo</code> file or directory in the root of your default Dropbox connected account</td>
+</tr>
+<tr>
+<td><code class="prettyprint">s3://foo</code></td>
+<td>The <code class="prettyprint">foo</code> bucket of your S3 account</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+  It is very common to use <code>data://.my</code> to refer to the hosted data collections belonging to the authenticated user.
+</aside>
+
+<p>The remainder of this documentation provides the specification for working with directories and files
+regardless of what data source they come from.</p>
+
+<h2 id="directories">Directories</h2>
+
+<p>Directories are a collection of files or other directories.</p>
+
+<h3 id="listing-a-directory">Listing a directory</h3>
+
+<blockquote>
+<p>Listing a directory:</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="c"># List top-level user directory</span>
+curl -H <span class="s1">'Authorization: Simple YOUR_API_KEY'</span> <span class="se">\</span>
+    https://api.algorithmia.com/v1/connector/data/.my
+
+<span class="gp">-&gt; </span><span class="o">{</span>
+    <span class="s2">"folders"</span>: <span class="o">[</span>
+        <span class="o">{</span> <span class="s2">"name"</span>: <span class="s2">"robots"</span> <span class="o">}</span>,
+        <span class="o">{</span> <span class="s2">"name"</span>: <span class="s2">"cats"</span> <span class="o">}</span>
+    <span class="o">]</span>
+<span class="o">}</span>
+
+<span class="c"># List a directory with ACLs</span>
+curl -H <span class="s1">'Authorization: Simple YOUR_API_KEY'</span> <span class="se">\</span>
+    https://api.algorithmia.com/v1/connector/data/.my/robots?acl<span class="o">=</span><span class="nb">true</span>
+
+<span class="gp">-&gt; </span><span class="o">{</span>
+    <span class="s2">"files"</span>: <span class="o">[</span>
+        <span class="o">{</span>
+            <span class="s2">"filename"</span>: <span class="s2">"R2-D2.txt"</span>,
+            <span class="s2">"last_modified"</span>: <span class="s2">"2016-01-06T00:52:34.000Z"</span>
+            <span class="s2">"size"</span>: 48
+        <span class="o">}</span>,
+        <span class="o">{</span>
+            <span class="s2">"filename"</span>: <span class="s2">"T-800.txt"</span>,
+            <span class="s2">"last_modified"</span>: <span class="s2">"2016-01-06T00:52:34.000Z"</span>
+            <span class="s2">"size"</span>: 36
+        <span class="o">}</span>
+    <span class="o">]</span>,
+    <span class="s2">"acl"</span>: <span class="o">{</span>
+        <span class="s2">"read"</span>: <span class="o">[</span> <span class="s2">"algo://.my/*"</span> <span class="o">]</span>
+    <span class="o">}</span>,
+    <span class="s2">"marker"</span>: <span class="s2">"12-abcdefgj9ao72LHhjglh3AcRtCuf7T1FeSoZTA1gycqRHaDrdp254LV9S1LjKgQZ"</span>
+<span class="o">}</span>
+</code></pre>
+<pre class="highlight cli"><code><span class="gp">$ </span>algo ls data://.my
+robots  cats
+
+<span class="gp">$ </span>algo ls -l data://.my/robots
+2016-01-06 00:52:34    48 R2-D2.txt
+2016-01-06 00:52:34    36 T-800.txt
+</code></pre>
+<pre class="highlight python"><code><span class="c"># List top level directories</span>
+<span class="kn">import</span> <span class="nn">Algorithmia</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">Algorithmia</span><span class="o">.</span><span class="n">client</span><span class="p">()</span>
+
+<span class="c"># The .dir() method takes a Data URI path and returns an Algorithmia.datadirectory.DataDirectory object for the child directory.</span>
+<span class="n">client</span><span class="o">.</span><span class="nb">dir</span><span class="p">(</span><span class="s">"data://.my"</span><span class="p">)</span>
+
+<span class="c"># Check if a specific directory exists</span>
+<span class="n">client</span><span class="o">.</span><span class="nb">dir</span><span class="p">(</span><span class="s">"data://.my/robots"</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+
+<span class="c"># The .dirs() method returns a generator object of all the child directories.</span>
+<span class="k">for</span> <span class="nb">dir</span> <span class="ow">in</span> <span class="n">client</span><span class="o">.</span><span class="nb">dir</span><span class="p">(</span><span class="s">"data://.my"</span><span class="p">)</span><span class="o">.</span><span class="n">dirs</span><span class="p">():</span>
+    <span class="c"># The .url is a convenience field that holds "/v1/data/" + dir.path</span>
+    <span class="c"># The .path is the path to the directory</span>
+    <span class="k">print</span> <span class="s">"Directory "</span> <span class="o">+</span> <span class="nb">dir</span><span class="o">.</span><span class="n">path</span> <span class="o">+</span> <span class="s">" at URL "</span> <span class="o">+</span> <span class="nb">dir</span><span class="o">.</span><span class="n">url</span>
+
+<span class="c"># List files in the 'robots' directory</span>
+<span class="nb">dir</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="nb">dir</span><span class="p">(</span><span class="s">"data://.my/robots"</span><span class="p">)</span>
+<span class="c"># The .files() method returns a generator object of all the files in directory</span>
+<span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="nb">dir</span><span class="o">.</span><span class="n">files</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s">"File "</span> <span class="o">+</span> <span class="nb">file</span><span class="o">.</span><span class="n">path</span> <span class="o">+</span> <span class="s">" at URL "</span> <span class="o">+</span> <span class="nb">file</span><span class="o">.</span><span class="n">url</span> <span class="o">+</span> <span class="s">" last modified "</span> <span class="o">+</span> <span class="nb">file</span><span class="o">.</span><span class="n">last_modified</span>
+</code></pre>
+<pre class="highlight r"><code><span class="c1"># List top level directories
+</span><span class="n">dir</span> <span class="o">&lt;-</span> <span class="n">client</span><span class="o">$</span><span class="n">dir</span><span class="p">(</span><span class="s2">"data://.my/"</span><span class="p">)</span>
+<span class="n">dirs</span> <span class="o">&lt;-</span> <span class="n">dir</span><span class="o">$</span><span class="n">dirs</span><span class="p">()</span>
+
+<span class="k">while</span> <span class="p">(</span><span class="n">dirs</span><span class="o">$</span><span class="n">hasNext</span><span class="p">())</span> <span class="p">{</span>
+  <span class="n">d</span> <span class="o">&lt;-</span> <span class="n">try</span><span class="p">(</span><span class="n">dirs</span><span class="o">$</span><span class="n">getNext</span><span class="p">())</span>
+  <span class="n">print</span><span class="p">(</span><span class="n">paste</span><span class="p">(</span><span class="n">d</span><span class="o">$</span><span class="n">dataDirectoryUrl</span><span class="p">,</span> <span class="n">d</span><span class="o">$</span><span class="n">dataDirectoryPath</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="c1"># List files in the 'robots' directory
+</span><span class="n">robots</span> <span class="o">=</span> <span class="n">client</span><span class="o">$</span><span class="n">dir</span><span class="p">(</span><span class="s2">"data://.my/robots"</span><span class="p">)</span>
+<span class="k">while</span> <span class="p">(</span><span class="n">robots</span><span class="o">$</span><span class="n">hasNext</span><span class="p">())</span> <span class="p">{</span>
+  <span class="n">d</span> <span class="o">&lt;-</span> <span class="n">try</span><span class="p">(</span><span class="n">robots</span><span class="o">$</span><span class="n">getNext</span><span class="p">())</span>
+  <span class="n">print</span><span class="p">(</span><span class="n">paste</span><span class="p">(</span><span class="n">d</span><span class="o">$</span><span class="n">dataDirectoryUrl</span><span class="p">,</span> <span class="n">d</span><span class="o">$</span><span class="n">dataDirectoryPath</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre>
+<pre class="highlight ruby"><code><span class="c1"># List top level directories</span>
+<span class="n">client</span><span class="p">.</span><span class="nf">dir</span><span class="p">(</span><span class="s2">"data://.my"</span><span class="p">).</span><span class="nf">each_dir</span> <span class="k">do</span> <span class="o">|</span><span class="n">dir</span><span class="o">|</span>
+    <span class="nb">puts</span> <span class="s2">"Directory "</span> <span class="o">+</span> <span class="n">dir</span><span class="p">.</span><span class="nf">data_uri</span>
+<span class="k">end</span>
+
+<span class="c1"># List files in the 'robots' directory</span>
+<span class="n">client</span><span class="p">.</span><span class="nf">dir</span><span class="p">(</span><span class="s2">"data://.my/robots"</span><span class="p">).</span><span class="nf">each_file</span> <span class="k">do</span> <span class="o">|</span><span class="n">file</span><span class="o">|</span>
+    <span class="nb">puts</span> <span class="s2">"File "</span> <span class="o">+</span> <span class="n">file</span><span class="p">.</span><span class="nf">data_uri</span>
+<span class="k">end</span>
+</code></pre>
+<pre class="highlight java"><code><span class="kn">import</span> <span class="nn">com.algorithmia.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.algorithmia.data.*</span><span class="o">;</span>
+
+<span class="c1">// List top level directories</span>
+<span class="n">DataDirectory</span> <span class="n">myRoot</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">dir</span><span class="o">(</span><span class="s">"data://.my"</span><span class="o">);</span>
+<span class="k">for</span><span class="o">(</span><span class="n">DataDirectory</span> <span class="n">dir</span> <span class="o">:</span> <span class="n">myRoot</span><span class="o">.</span><span class="na">dirs</span><span class="o">())</span> <span class="o">{</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Directory "</span> <span class="o">+</span> <span class="n">dir</span><span class="o">.</span><span class="na">toString</span><span class="o">()</span> <span class="o">+</span> <span class="s">" at URL "</span> <span class="o">+</span> <span class="n">dir</span><span class="o">.</span><span class="na">url</span><span class="o">());</span>
+<span class="o">}</span>
+
+<span class="c1">// List files in the 'robots' directory</span>
+<span class="n">DataDirectory</span> <span class="n">robots</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">dir</span><span class="o">(</span><span class="s">"data://.my/robots"</span><span class="o">);</span>
+<span class="k">for</span><span class="o">(</span><span class="n">DataFile</span> <span class="n">file</span> <span class="o">:</span> <span class="n">robots</span><span class="o">.</span><span class="na">files</span><span class="o">())</span> <span class="o">{</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"File "</span> <span class="o">+</span> <span class="n">file</span><span class="o">.</span><span class="na">toString</span><span class="o">()</span> <span class="o">+</span> <span class="s">" at URL: "</span> <span class="o">+</span> <span class="n">file</span><span class="o">.</span><span class="na">url</span><span class="o">());</span>
+<span class="o">}</span>
+</code></pre>
+<pre class="highlight scala"><code><span class="k">import</span> <span class="nn">com.algorithmia._</span>
+<span class="k">import</span> <span class="nn">com.algorithmia.data._</span>
+
+<span class="c1">// List top level directories
+</span><span class="k">val</span> <span class="n">myRoot</span> <span class="k">=</span> <span class="n">client</span><span class="o">.</span><span class="n">dir</span><span class="o">(</span><span class="s">"data://.my"</span><span class="o">)</span>
+<span class="k">for</span><span class="o">(</span><span class="n">dir</span> <span class="k">&lt;-</span> <span class="n">myRoot</span><span class="o">.</span><span class="n">getDirIter</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">"Directory ${dir.toString} at URL: ${dir.url}"</span><span class="o">)</span>
+<span class="o">}</span>
+
+<span class="c1">// List files in the 'robots' directory
+</span><span class="k">val</span> <span class="n">robots</span> <span class="k">=</span> <span class="n">client</span><span class="o">.</span><span class="n">dir</span><span class="o">(</span><span class="s">"data://.my/robots"</span><span class="o">)</span>
+<span class="k">for</span><span class="o">(</span><span class="n">file</span> <span class="k">&lt;-</span> <span class="n">robots</span><span class="o">.</span><span class="n">getFileIter</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">"File ${file.toString} at URL: ${file.url}"</span><span class="o">)</span>
+<span class="o">}</span>
+</code></pre>
+<pre class="highlight rust"><code><span class="k">use</span> <span class="nn">algorithmia</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">algorithmia</span><span class="p">::</span><span class="nn">data</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
+
+<span class="k">let</span> <span class="n">my_robots</span> <span class="o">=</span> <span class="n">client</span><span class="nf">.dir</span><span class="p">(</span><span class="s">"data://.my/robots"</span><span class="p">);</span>
+<span class="k">for</span> <span class="n">entry</span> <span class="n">in</span> <span class="n">my_robots</span><span class="nf">.list</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">match</span> <span class="n">entry</span> <span class="p">{</span>
+        <span class="nf">Ok</span><span class="p">(</span><span class="nn">DirEntry</span><span class="p">::</span><span class="nf">Dir</span><span class="p">(</span><span class="n">dir</span><span class="p">))</span> <span class="k">=&gt;</span> <span class="nd">println!</span><span class="p">(</span><span class="s">"Directory {}"</span><span class="p">,</span> <span class="n">dir</span><span class="nf">.to_data_uri</span><span class="p">()),</span>
+        <span class="nf">Ok</span><span class="p">(</span><span class="nn">DirEntry</span><span class="p">::</span><span class="nf">File</span><span class="p">(</span><span class="n">file</span><span class="p">))</span> <span class="k">=&gt;</span> <span class="nd">println!</span><span class="p">(</span><span class="s">"File {}"</span><span class="p">,</span> <span class="n">file</span><span class="nf">.to_data_uri</span><span class="p">()),</span>
+        <span class="nf">Err</span><span class="p">(</span><span class="n">err</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="nd">println!</span><span class="p">(</span><span class="s">"Error listing my robots: {}"</span><span class="p">,</span> <span class="n">err</span><span class="p">),</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<pre class="highlight nodejs"><code><span class="c1">// List top level directories</span>
+<span class="nx">client</span><span class="p">.</span><span class="nx">dir</span><span class="p">(</span><span class="s2">"data://.my"</span><span class="p">).</span><span class="nx">forEachDir</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">dir</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Error: "</span> <span class="o">+</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">err</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dir</span><span class="p">.</span><span class="nx">data_path</span><span class="p">);</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Finished listing directory"</span><span class="p">);</span>
+<span class="p">});</span>
+
+
+<span class="c1">// List files in the 'robots' directory</span>
+<span class="nx">client</span><span class="p">.</span><span class="nx">dir</span><span class="p">(</span><span class="s2">"data://.my/robots"</span><span class="p">).</span><span class="nx">forEachFile</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">file</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Error: "</span> <span class="o">+</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">err</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">file</span><span class="p">.</span><span class="nx">data_path</span><span class="p">);</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Finished listing directory"</span><span class="p">);</span>
+<span class="p">});</span>
+
+
+</code></pre>
+
+<p>List the contents of a directory with this HTTP endpoint:</p>
+
+<p><code class="prettyprint">GET https://api.algorithmia.com/api/v1/connector/:connector/*path</code></p>
+
+<ul>
+<li><code class="prettyprint">:connector</code> is the data source: <code class="prettyprint">data</code>, <code class="prettyprint">dropbox</code>, <code class="prettyprint">s3</code>, or a labeled variant (e.g. <code class="prettyprint">dropbox+mylabel</code>).</li>
+<li><code class="prettyprint">*path</code> is relative to the root of a given data source.</li>
+</ul>
+
+<aside class="notice">
+Each client SDK provides a way to iterate through contents of a directory using its <a href="#data-uri">Data URI</a>.
+These iterators manage the marker-based pagination and fetch additional contents for large directories as needed.
+See the language-specific examples to the right.
+</aside>
+
+<aside class="warning">
+  This endpoint overlaps with the endpoint for fetching a file. If you aren&rsquo;t sure if a path refers to a file or directory,
+  you should first check if it exists. The `exists` methods make a `HEAD` request that check the `X-Data-Type` response header.
+</aside>
+
+<h5 id="query-parameters">Query Parameters</h5>
+
+<table><thead>
+<tr>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>marker</td>
+<td>Indicates the page of results to return. Only valid when using markers previously returned by this API. If this parameter is omited then the first page is returned</td>
+</tr>
+<tr>
+<td>acl</td>
+<td>Include the directory ACL in the response. (Default = false)</td>
+</tr>
+</tbody></table>
+
+<h5 id="http-response">HTTP Response</h5>
+
+<p>The response JSON contains the following attributes:</p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>folders</td>
+<td>[Optional] array of subdirectories</td>
+</tr>
+<tr>
+<td>files</td>
+<td>[Optional] array of files in directory. <code class="prettyprint">last_modified</code> is an ISO-8601 timestamp and <code class="prettyprint">size</code> is measured in bytes</td>
+</tr>
+<tr>
+<td>marker</td>
+<td>[Optional] string that indicates there are more files or folders within this directory that can be queried for using the marker query parameter</td>
+</tr>
+<tr>
+<td>acl.read</td>
+<td>[Optional] array of ACL strings defining who has read permissions to this directory. Explanation of ACL strings provided below.</td>
+</tr>
+</tbody></table>
+
+<p>The API is limited to returning 1000 folders or files at a time, so listing
+all contents of a directory may require multiple paginated requests.</p>
+
+<p><strong>ACL Strings:</strong></p>
+
+<ul>
+<li><code class="prettyprint">user://*</code>: Readable by anyone (public)</li>
+<li><code class="prettyprint">algo://.my/*</code>: Readable by your algorithms (default)</li>
+<li>Fully private is represented as an empty list</li>
+<li>No other ACL strings are currently supported</li>
+</ul>
+
+<p><strong>Response Headers:</strong></p>
+
+<p><code class="prettyprint">X-Data-Type: directory</code></p>
+
+<h3 id="creating-a-directory">Creating a directory</h3>
+
+<blockquote>
+<p>Creating a directory:</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="c"># Create a directory named 'robots'</span>
+curl -X POST -H <span class="s1">'Authorization: Simple YOUR_API_KEY'</span> <span class="se">\</span>
+    -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+    -d <span class="s1">'{"name": "robots"}'</span> <span class="se">\</span>
+    https://api.algorithmia.com/v1/connector/data/.my
+<span class="c"># Empty 200 response on success</span>
+
+<span class="c"># Create a publicly accessible directory named 'public_robots'</span>
+curl -X POST -H <span class="s1">'Authorization: Simple YOUR_API_KEY'</span> <span class="se">\</span>
+    -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+    -d <span class="s1">'{"name": "public_robots", "acl": {"read": ["user://*"]}}'</span> <span class="se">\</span>
+    https://api.algorithmia.com/v1/connector/data/.my
+<span class="c"># Empty 200 response on success</span>
+</code></pre>
+<pre class="highlight cli"><code><span class="gp">$ </span>algo mkdir data://.my/robots
+Created directory: data://.my/robots
+</code></pre>
+<pre class="highlight python"><code><span class="n">robots</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="nb">dir</span><span class="p">(</span><span class="s">"data://.my/robots"</span><span class="p">)</span>
+<span class="n">robots</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+
+<span class="c"># You can also create a directory with different permissions</span>
+<span class="kn">from</span> <span class="nn">Algorithmia.acl</span> <span class="kn">import</span> <span class="n">ReadAcl</span>
+<span class="c"># Supports: ReadAcl.public, ReadAcl.private, ReadAcl.my_algos</span>
+<span class="n">robots</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">ReadAcl</span><span class="o">.</span><span class="n">public</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight r"><code><span class="n">robots</span> <span class="o">&lt;-</span> <span class="n">client</span><span class="o">$</span><span class="n">dir</span><span class="p">(</span><span class="s2">"data://.my/robots"</span><span class="p">)</span>
+<span class="n">robots</span><span class="o">$</span><span class="n">create</span><span class="p">()</span>
+
+<span class="c1"># You can also create a directory with different permissions
+# Supports: ReadAcl.PUBLIC, ReadAcl.PRIVATE, ReadAcl.MY_ALGORITHMS
+</span><span class="n">robots</span><span class="o">$</span><span class="n">create</span><span class="p">(</span><span class="n">ReadAcl.PUBLIC</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight ruby"><code><span class="n">robots</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">dir</span><span class="p">(</span><span class="s2">"data://.my/robots"</span><span class="p">)</span>
+<span class="n">robots</span><span class="p">.</span><span class="nf">create</span>
+</code></pre>
+<pre class="highlight java"><code><span class="n">DataDirectory</span> <span class="n">robots</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">dir</span><span class="o">(</span><span class="s">"data://.my/robots"</span><span class="o">);</span>
+<span class="n">robots</span><span class="o">.</span><span class="na">create</span><span class="o">();</span>
+</code></pre>
+<pre class="highlight scala"><code><span class="k">val</span> <span class="n">robots</span> <span class="k">=</span> <span class="n">client</span><span class="o">.</span><span class="n">dir</span><span class="o">(</span><span class="s">"data://.my/robots"</span><span class="o">)</span>
+<span class="n">robots</span><span class="o">.</span><span class="n">create</span><span class="o">()</span>
+</code></pre>
+<pre class="highlight rust"><code><span class="k">let</span> <span class="n">robots</span> <span class="o">=</span> <span class="n">client</span><span class="nf">.dir</span><span class="p">(</span><span class="s">"data://.my/robots"</span><span class="p">);</span>
+<span class="n">robots</span><span class="nf">.create</span><span class="p">(</span><span class="nn">DataAcl</span><span class="p">::</span><span class="nf">default</span><span class="p">())</span>
+</code></pre>
+<pre class="highlight nodejs"><code><span class="kd">var</span> <span class="nx">robots</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">dir</span><span class="p">(</span><span class="s2">"data://.my/robots"</span><span class="p">);</span>
+<span class="nx">robots</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Failed to create dir: "</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Created directory: "</span> <span class="o">+</span> <span class="nx">robots</span><span class="p">.</span><span class="nx">data_path</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre>
+
+<p>To create a directory through the Algorithmia Data API, use the following endpoint:</p>
+
+<p><code class="prettyprint">POST https://api.algorithmia.com/v1/connector/:connector/*path</code></p>
+
+<ul>
+<li><code class="prettyprint">:connector</code> is the data source: <code class="prettyprint">data</code>, <code class="prettyprint">dropbox</code>, <code class="prettyprint">s3</code>, or a labeled variant (e.g. <code class="prettyprint">dropbox+mylabel</code>).</li>
+<li><code class="prettyprint">*path</code> refers to the path of the existing parent directory of the directory that should be created.</li>
+</ul>
+
+<aside class="notice">
+Each client SDK provides a method for creading a directory using its <a href="#data-uri">Data URI</a>.
+See the language-specific examples to the right.
+</aside>
+
+<aside class="warning">
+  Algorithmia hosted directories are currently only supported as top-level directories under your user (e.g. <code>data://.my</code>).
+  Additionally, directories cannot be created in the S3 root namespace (e.g. <code>s3://</code>) as creating S3 buckets is not supported.
+  If you configured path restrictions when connecting an external data source, then additional limitations may exist.
+</aside>
+
+<h5 id="input">Input</h5>
+
+<p>Input is JSON and requires the header: <code class="prettyprint">Content-Type: application/json</code></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>Name of the directory to create</td>
+</tr>
+<tr>
+<td>acl</td>
+<td>[Optional] JSON object specifying permissions of the directory</td>
+</tr>
+</tbody></table>
+
+<p><strong>ACL Attribute:</strong></p>
+
+<p>Permission for a directory are determined by setting <code class="prettyprint">acl.read</code> to an array of ACL strings:</p>
+
+<ul>
+<li><code class="prettyprint">user://*</code>: Readable by anyone (public)</li>
+<li><code class="prettyprint">algo://.my/*</code>: Readable by your algorithms (default)</li>
+<li>Fully private is represented as an empty list</li>
+<li>No other ACL strings are currently supported</li>
+</ul>
+
+<p>Example: <code class="prettyprint">&quot;acl&quot;: {&quot;read&quot;: []}</code> implies the directory is fully private</p>
+
+<aside class="notice">
+    Write ACLs are not currently configurable. Only the directory owner has write access to a directory.
+</aside>
+
+<h5 id="response">Response:</h5>
+
+<p>Empty 200 response on success</p>
+
+<h3 id="updating-a-directory">Updating a directory</h3>
+
+<blockquote>
+<p>Updating a directory:</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X PATCH -H <span class="s1">'Authorization: Simple YOUR_API_KEY'</span> <span class="se">\</span>
+    -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+    -d <span class="s1">'{"acl": {"read": ["user://*"]}}'</span> <span class="se">\</span>
+    https://api.algorithmia.com/v1/connector/data/.my
+<span class="c"># Empty 200 response on success</span>
+</code></pre>
+<pre class="highlight python"><code><span class="kn">from</span> <span class="nn">Algorithmia.acl</span> <span class="kn">import</span> <span class="n">ReadAcl</span><span class="p">,</span> <span class="n">AclType</span>
+<span class="n">robots</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="nb">dir</span><span class="p">(</span><span class="s">"data://.my/robots"</span><span class="p">)</span>
+<span class="n">robots</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">robots</span><span class="o">.</span><span class="n">get_permissions</span><span class="p">()</span><span class="o">.</span><span class="n">read_acl</span> <span class="o">==</span> <span class="n">AclType</span><span class="o">.</span><span class="n">my_algos</span> <span class="c">#  True</span>
+<span class="c"># Supports: ReadAcl.public, ReadAcl.private, ReadAcl.my_algos</span>
+<span class="n">robots</span><span class="o">.</span><span class="n">update_permissions</span><span class="p">(</span><span class="n">ReadAcl</span><span class="o">.</span><span class="n">private</span><span class="p">)</span>  <span class="c"># True if update succeeded</span>
+</code></pre>
+<pre class="highlight r"><code><span class="n">robots</span> <span class="o">&lt;-</span> <span class="n">client</span><span class="o">$</span><span class="n">dir</span><span class="p">(</span><span class="s2">"data://.my/robots"</span><span class="p">)</span>
+<span class="c1"># Create a directory with public permissions
+</span><span class="n">robots</span><span class="o">$</span><span class="n">create</span><span class="p">(</span><span class="n">ReadAcl.PUBLIC</span><span class="p">)</span>
+<span class="n">acl</span> <span class="o">&lt;-</span> <span class="n">robots</span><span class="o">$</span><span class="n">getPermissions</span><span class="p">()</span>  <span class="c1"># Acl object
+</span><span class="n">acl</span><span class="o">$</span><span class="n">read_acl</span> <span class="c1"># Returns Permission Type, "PUBLIC" if update succeeded.
+</span>
+<span class="c1"># Supports: ReadAcl.PUBLIC, ReadAcl.PRIVATE, and ReadAcl.MY_ALGORITHMS.
+</span><span class="n">robots</span><span class="o">$</span><span class="n">updatePermissions</span><span class="p">(</span><span class="n">ReadAcl.PRIVATE</span><span class="p">)</span>
+<span class="n">acl</span><span class="o">$</span><span class="n">read_acl</span> <span class="c1"># Returns Permission Type, "PRIVATE" if update succeeded.
+</span></code></pre>
+<pre class="highlight java"><code><span class="n">DataDirectory</span> <span class="n">robots</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">dir</span><span class="o">(</span><span class="s">"data://.my/robots"</span><span class="o">);</span>
+
+<span class="c1">// Create the directory as private</span>
+<span class="n">robots</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">DataAcl</span><span class="o">.</span><span class="na">PRIVATE</span><span class="o">);</span>
+
+<span class="c1">// Supports: DataAcl.PUBLIC, DataAcl.PRIVATE, DataAcl.My_ALGOS</span>
+<span class="n">robots</span><span class="o">.</span><span class="na">updatePermissions</span><span class="o">(</span><span class="n">DataAcl</span><span class="o">.</span><span class="na">PUBLIC</span><span class="o">);</span>
+
+<span class="c1">// Check a directory's permissions</span>
+<span class="k">if</span> <span class="o">(</span><span class="n">robots</span><span class="o">.</span><span class="na">getPermissions</span><span class="o">().</span><span class="na">getReadPermissions</span><span class="o">()</span> <span class="o">==</span> <span class="n">DataAclType</span><span class="o">.</span><span class="na">PRIVATE</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"fooLimited is private"</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre>
+
+<p>To update a directory, use the following API:</p>
+
+<p><code class="prettyprint">PATCH https://api.algorithmia.com/v1/connector/*path</code></p>
+
+<ul>
+<li><code class="prettyprint">:connector</code> is the data source: <code class="prettyprint">data</code>, <code class="prettyprint">dropbox</code>, <code class="prettyprint">s3</code>, or a labeled variant (e.g. <code class="prettyprint">dropbox+mylabel</code>).</li>
+<li><code class="prettyprint">*path</code> is relative to the root of a given data source.</li>
+</ul>
+
+<h5 id="input">Input:</h5>
+
+<p>Input is JSON and requires the header: <code class="prettyprint">Content-Type: application/json</code></p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>acl</td>
+<td>[Optional] JSON object specifying permissions of the directory</td>
+</tr>
+</tbody></table>
+
+<p><strong>ACL Attribute:</strong></p>
+
+<p>Permission for a directory are determined by setting <code class="prettyprint">acl.read</code> to an array of ACL strings:</p>
+
+<ul>
+<li><code class="prettyprint">user://*</code>: Readable by anyone (public)</li>
+<li><code class="prettyprint">algo://.my/*</code>: Readable by your algorithms (default)</li>
+<li>Fully private is represented as an empty list</li>
+<li>No other ACL strings are currently supported</li>
+</ul>
+
+<p>Example: <code class="prettyprint">&quot;acl&quot;: {&quot;read&quot;: []}</code> implies the directory is fully private</p>
+
+<h5 id="output">Output:</h5>
+
+<p>Empty 200 response on success</p>
+
+<h3 id="deleting-a-directory">Deleting a directory</h3>
+
+<blockquote>
+<p>Deleting a directory</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="c"># Delete the empty directory data://.my/public_robots</span>
+curl -X DELETE -H <span class="s1">'Authorization: Simple YOUR_API_KEY'</span> <span class="se">\</span>
+    https://api.algorithmia.com/v1/connector/data/.my/public_robots
+
+<span class="gp">-&gt; </span><span class="o">{</span> <span class="s2">"result"</span>: <span class="o">{</span> <span class="s2">"deleted"</span>: 0 <span class="o">}}</span>
+
+<span class="c"># Force delete the directory data://.my/robots even if it contains files</span>
+curl -X DELETE -H <span class="s1">'Authorization: Simple YOUR_API_KEY'</span> <span class="se">\</span>
+    https://api.algorithmia.com/v1/connector/data/.my/robots?force<span class="o">=</span><span class="nb">true</span>
+
+<span class="gp">-&gt; </span><span class="o">{</span> <span class="s2">"result"</span>: <span class="o">{</span> <span class="s2">"deleted"</span>: 25 <span class="o">}}</span>
+</code></pre>
+<pre class="highlight cli"><code><span class="gp">$ </span>algo rmdir data://.my/public_robots
+Deleted directory: data://.my/public_robots
+
+<span class="gp">$ </span>algo rmdir -f data://.my/robots
+Deleted directory: data://.my/robots
+</code></pre>
+<pre class="highlight python"><code><span class="n">robots</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="nb">dir</span><span class="p">(</span><span class="s">"data://.my/robots"</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">robots</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="n">robots</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight r"><code><span class="n">robots</span> <span class="o">&lt;-</span> <span class="n">client</span><span class="o">$</span><span class="n">dir</span><span class="p">(</span><span class="s2">"data://.my/robots"</span><span class="p">)</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">robots</span><span class="o">$</span><span class="n">exists</span><span class="p">()){</span>
+  <span class="n">robots</span><span class="o">$</span><span class="n">delete</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre>
+<pre class="highlight ruby"><code><span class="n">robots</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">dir</span><span class="p">(</span><span class="s2">"data://.my/robots"</span><span class="p">)</span>
+<span class="n">robots</span><span class="p">.</span><span class="nf">delete</span>
+<span class="c1"># to force deletion even if dir contains file, use:</span>
+<span class="c1"># robots.delete(true)</span>
+</code></pre>
+<pre class="highlight java"><code><span class="n">DataDirectory</span> <span class="n">robots</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">dir</span><span class="o">(</span><span class="s">"data://.my/robots"</span><span class="o">);</span>
+<span class="n">robots</span><span class="o">.</span><span class="na">delete</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+<span class="c1">// use `true` to force deletion even if dir contains files</span>
+</code></pre>
+<pre class="highlight scala"><code><span class="k">val</span> <span class="n">robots</span> <span class="k">=</span> <span class="n">client</span><span class="o">.</span><span class="n">dir</span><span class="o">(</span><span class="s">"data://.my/robots"</span><span class="o">)</span>
+<span class="n">robots</span><span class="o">.</span><span class="n">delete</span><span class="o">(</span><span class="kc">false</span><span class="o">)</span>
+<span class="c1">// use `true` to force deletion even if dir contains files
+</span></code></pre>
+<pre class="highlight rust"><code><span class="k">let</span> <span class="n">robots</span> <span class="o">=</span> <span class="n">client</span><span class="nf">.dir</span><span class="p">(</span><span class="s">"data://.my/robots"</span><span class="p">);</span>
+<span class="n">robots</span><span class="nf">.delete</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
+<span class="c">// use `true` to force deletion even if dir contains files</span>
+</code></pre>
+<pre class="highlight nodejs"><code><span class="kd">var</span> <span class="nx">robots</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">dir</span><span class="p">(</span><span class="s2">"data://.my/robots"</span><span class="p">);</span>
+<span class="nx">robots</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="kc">false</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Failed to delete dir: "</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Deleted directory: "</span> <span class="o">+</span> <span class="nx">robots</span><span class="p">.</span><span class="nx">data_path</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="cm">/*
+  Use `robots.delete(true, callback)`
+  to force deletion even if dir contains files
+*/</span>
+</code></pre>
+
+<p>To delete a directory, use the following endpoint:</p>
+
+<p><code class="prettyprint">DELETE https://api.algorithmia.com/v1/connector/:connector/*path</code></p>
+
+<ul>
+<li><code class="prettyprint">:connector</code> is the data source: <code class="prettyprint">data</code>, <code class="prettyprint">dropbox</code>, <code class="prettyprint">s3</code>, or a labeled variant (e.g. <code class="prettyprint">dropbox+mylabel</code>).</li>
+<li><code class="prettyprint">*path</code> is relative to the root of a given data source.</li>
+</ul>
+
+<aside class="notice">
+Each client SDK provides a method for deleting a directory using its <a href="#data-uri">Data URI</a>.
+The method for deleting a directory may take a boolean argument that specifies if the directory should
+be forcibly deleting even if the directory has contents.
+See the language-specific examples to the right.
+</aside>
+
+<h5 id="query-parameters">Query Parameters</h5>
+
+<table><thead>
+<tr>
+<th>Parameters</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>force</td>
+<td>if true, enables recursive delete of a non-empty directory</td>
+</tr>
+</tbody></table>
+
+<h5 id="response">Response</h5>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>result.deleted</td>
+<td>The number of files successfully deleted</td>
+</tr>
+<tr>
+<td>error.deleted</td>
+<td>The number of files successfully deleted if an error encountered during deletion</td>
+</tr>
+</tbody></table>
+
+<h2 id="files">Files</h2>
+
+<p>Files can be any type of data and are uniquely identified by a <a href="#data-uri">Data URI</a></p>
+
+<h3 id="getting-a-file">Getting a file</h3>
+
+<blockquote>
+<p>Getting a file:</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -O -H <span class="s1">'Authorization: Simple YOUR_API_KEY'</span> <span class="se">\</span>
+    https://api.algorithmia.com/v1/connector/data/.my/robots/T-800.png
+<span class="c"># Downloaded to `T-800.png` in local working directory</span>
+</code></pre>
+<pre class="highlight cli"><code><span class="c"># Download file to current directory with 'algo cp'</span>
+<span class="gp">$ </span>algo cp data://.my/robots/T-800.png .
+Downloaded data://.my/robots/T-800.png <span class="o">(</span>657kB<span class="o">)</span>
+Finished downloading 1 file<span class="o">(</span>s<span class="o">)</span>
+
+<span class="c"># Echo file contents to STDOUT with 'algo cat'</span>
+<span class="gp">$ </span>algo cat data://.my/robots/T-800.txt
+Cyberdyne Systems Series 800 Terminator
+</code></pre>
+<pre class="highlight python"><code><span class="c"># Download file and get the file handle</span>
+<span class="n">t800File</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="nb">file</span><span class="p">(</span><span class="s">"data://.my/robots/T-800.png"</span><span class="p">)</span><span class="o">.</span><span class="n">getFile</span><span class="p">()</span>
+
+<span class="c"># Get file's contents as a string</span>
+<span class="n">t800Text</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="nb">file</span><span class="p">(</span><span class="s">"data://.my/robots/T-800.txt"</span><span class="p">)</span><span class="o">.</span><span class="n">getString</span><span class="p">()</span>
+
+<span class="c"># Get file's contents as JSON</span>
+<span class="n">t800Json</span> <span class="o">=</span>  <span class="n">client</span><span class="o">.</span><span class="nb">file</span><span class="p">(</span><span class="s">"data://.my/robots/T-800.txt"</span><span class="p">)</span><span class="o">.</span><span class="n">getJson</span><span class="p">()</span>
+
+<span class="c"># Get file's contents as a byte array</span>
+<span class="n">t800Bytes</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="nb">file</span><span class="p">(</span><span class="s">"data://.my/robots/T-800.png"</span><span class="p">)</span><span class="o">.</span><span class="n">getBytes</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight r"><code><span class="c1"># Download file and get the file handle
+</span><span class="n">t800File</span> <span class="o">&lt;-</span> <span class="n">client</span><span class="o">$</span><span class="n">file</span><span class="p">(</span><span class="s2">"data://.my/robots/T-800.png"</span><span class="p">)</span><span class="o">$</span><span class="n">getFile</span><span class="p">()</span>
+
+<span class="c1"># Get file's contents as a string
+</span><span class="n">t800Text</span> <span class="o">&lt;-</span> <span class="n">client</span><span class="o">$</span><span class="n">file</span><span class="p">(</span><span class="s2">"data://.my/robots/T-800.txt"</span><span class="p">)</span><span class="o">$</span><span class="n">getString</span><span class="p">()</span>
+
+<span class="c1"># Get file's contents as JSON
+</span><span class="n">t800Json</span> <span class="o">&lt;-</span>  <span class="n">client</span><span class="o">$</span><span class="n">file</span><span class="p">(</span><span class="s2">"data://.my/robots/T-800.txt"</span><span class="p">)</span><span class="o">$</span><span class="n">getJson</span><span class="p">()</span>
+
+<span class="c1"># Get file's contents as a byte array
+</span><span class="n">t800Bytes</span> <span class="o">&lt;-</span> <span class="n">client</span><span class="o">$</span><span class="n">file</span><span class="p">(</span><span class="s2">"data://.my/robots/T-800.png"</span><span class="p">)</span><span class="o">$</span><span class="n">getBytes</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight ruby"><code><span class="c1"># Download file and get the file handle</span>
+<span class="n">t800File</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">file</span><span class="p">(</span><span class="s2">"data://.my/robots/T-800.png"</span><span class="p">).</span><span class="nf">get_file</span>
+
+<span class="c1"># Get file's contents as a string</span>
+<span class="n">t800Text</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">file</span><span class="p">(</span><span class="s2">"data://.my/robots/T-800.txt"</span><span class="p">).</span><span class="nf">get</span>
+
+<span class="c1"># Get file's contents as JSON</span>
+<span class="n">t800JsonString</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">file</span><span class="p">(</span><span class="s2">"data://.my/robots/T-800.txt"</span><span class="p">).</span><span class="nf">get</span>
+<span class="n">t800Json</span> <span class="o">=</span>  <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">t800JsonString</span><span class="p">)</span>
+
+<span class="c1"># Get file's contents as a byte array</span>
+<span class="n">t800Bytes</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">file</span><span class="p">(</span><span class="s2">"data://.my/robots/T-800.png"</span><span class="p">).</span><span class="nf">get</span>
+</code></pre>
+<pre class="highlight java"><code><span class="n">DataDirectory</span> <span class="n">robots</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">dir</span><span class="o">(</span><span class="s">"data://.my/robots"</span><span class="o">);</span>
+
+<span class="c1">// Download file and get the file handle</span>
+<span class="n">File</span> <span class="n">t800File</span> <span class="o">=</span> <span class="n">robots</span><span class="o">.</span><span class="na">file</span><span class="o">(</span><span class="s">"T-800.png"</span><span class="o">).</span><span class="na">getFile</span><span class="o">();</span>
+
+<span class="c1">// Get the file's contents as a string</span>
+<span class="n">String</span> <span class="n">t800Text</span> <span class="o">=</span> <span class="n">robots</span><span class="o">.</span><span class="na">file</span><span class="o">(</span><span class="s">"T-800.txt"</span><span class="o">).</span><span class="na">getString</span><span class="o">();</span>
+
+<span class="c1">// Get the file's contents as a byte array</span>
+<span class="kt">byte</span><span class="o">[]</span> <span class="n">t800Bytes</span> <span class="o">=</span> <span class="n">robots</span><span class="o">.</span><span class="na">file</span><span class="o">(</span><span class="s">"T-800.png"</span><span class="o">).</span><span class="na">getBytes</span><span class="o">();</span>
+</code></pre>
+<pre class="highlight scala"><code><span class="k">val</span> <span class="n">robots</span> <span class="k">=</span> <span class="n">client</span><span class="o">.</span><span class="n">dir</span><span class="o">(</span><span class="s">"data://.my/robots"</span><span class="o">)</span>
+
+<span class="c1">// Download file and get the file handle
+</span><span class="k">val</span> <span class="n">t800File</span> <span class="k">=</span> <span class="n">robots</span><span class="o">.</span><span class="n">file</span><span class="o">(</span><span class="s">"T-800.png"</span><span class="o">).</span><span class="n">getFile</span><span class="o">()</span>
+
+<span class="c1">// Get the file's contents as a string
+</span><span class="k">val</span> <span class="n">t800Text</span> <span class="k">=</span> <span class="n">robots</span><span class="o">.</span><span class="n">file</span><span class="o">(</span><span class="s">"T-800.txt"</span><span class="o">).</span><span class="n">getString</span><span class="o">()</span>
+
+<span class="c1">// Get the file's contents as a byte array
+</span><span class="k">val</span> <span class="n">t800Bytes</span> <span class="k">=</span> <span class="n">robots</span><span class="o">.</span><span class="n">file</span><span class="o">(</span><span class="s">"T-800.png"</span><span class="o">).</span><span class="n">getBytes</span><span class="o">()</span>
+</code></pre>
+<pre class="highlight rust"><code><span class="c">// Download and locally save file</span>
+<span class="k">let</span> <span class="k">mut</span> <span class="n">t800_png_reader</span> <span class="o">=</span> <span class="n">client</span><span class="nf">.file</span><span class="p">(</span><span class="s">"data://.my/robots/T-800.png"</span><span class="p">)</span><span class="nf">.get</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">();</span>
+<span class="k">let</span> <span class="k">mut</span> <span class="n">t800_png</span> <span class="o">=</span> <span class="nn">File</span><span class="p">::</span><span class="nf">create</span><span class="p">(</span><span class="s">"/path/to/save/t800.png"</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
+<span class="nn">std</span><span class="p">::</span><span class="nn">io</span><span class="p">::</span><span class="k">copy</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="n">t800_png_reader</span><span class="p">,</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="n">t800_png</span><span class="p">);</span>
+
+<span class="c">// Get the file's contents as a string</span>
+<span class="k">let</span> <span class="k">mut</span> <span class="n">t800_text_reader</span> <span class="o">=</span> <span class="n">robots</span><span class="nf">.file</span><span class="p">(</span><span class="s">"data://.my/robots/T-800.txt"</span><span class="p">)</span><span class="nf">.get</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">();</span>
+<span class="k">let</span> <span class="k">mut</span> <span class="n">t800_text</span> <span class="o">=</span> <span class="nn">String</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
+<span class="n">t800_text_reader</span><span class="nf">.read_to_string</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="n">t800_text</span><span class="p">);</span>
+
+<span class="c">// Get the file's contents as a byte array</span>
+<span class="k">let</span> <span class="k">mut</span> <span class="n">t800_png_reader</span> <span class="o">=</span> <span class="n">robots</span><span class="nf">.file</span><span class="p">(</span><span class="s">"data://.my/robots/T-800.png"</span><span class="p">)</span><span class="nf">.get</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">();</span>
+<span class="k">let</span> <span class="k">mut</span> <span class="n">t800_bytes</span> <span class="o">=</span> <span class="nn">Vec</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
+<span class="n">t800_png_reader</span><span class="nf">.read_to_end</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="n">t800_bytes</span><span class="p">);</span>
+</code></pre>
+<pre class="highlight nodejs"><code><span class="kd">var</span> <span class="nx">robots</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">dir</span><span class="p">(</span><span class="s2">"data://.my/robots"</span><span class="p">);</span>
+
+<span class="c1">// Get the file's contents</span>
+<span class="nx">robots</span><span class="p">.</span><span class="nx">file</span><span class="p">(</span><span class="s2">"T-800.txt"</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// on success, data will be string or Buffer</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// Get a file and write it to a local file</span>
+<span class="nx">robots</span><span class="p">.</span><span class="nx">file</span><span class="p">(</span><span class="s2">"T-800.jpg"</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Read "</span> <span class="o">+</span> <span class="nx">data</span><span class="p">.</span><span class="nx">length</span> <span class="o">+</span> <span class="s2">" bytes"</span><span class="p">);</span>
+  <span class="nx">fs</span><span class="p">.</span><span class="nx">writeFileSync</span><span class="p">(</span><span class="s2">"/path/to/save/T-800.jpg"</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre>
+
+<p>To retrieve a file through the Algorithmia Data API, use the following endpoint:</p>
+
+<p><code class="prettyprint">GET https://api.algorithmia.com/v1/connector/:connector/*path</code></p>
+
+<ul>
+<li><code class="prettyprint">:connector</code> is the data source: <code class="prettyprint">data</code>, <code class="prettyprint">dropbox</code>, <code class="prettyprint">s3</code>, or a labeled variant (e.g. <code class="prettyprint">dropbox+mylabel</code>).</li>
+<li><code class="prettyprint">*path</code> is relative to the root of a given data source.</li>
+</ul>
+
+<aside class="notice">
+  Each client SDK provides one or more methods for downloading a file using its <a href="#data-uri">Data URI</a>.
+  In general, these clients make it easy retrieve into common data structure ranging from strings, to byte streams, to temporary files.
+  See the language-specific examples to the right.
+</aside>
+
+<aside class="warning">
+  This endpoint overlaps with the endpoint for listing a directory. If you aren&rsquo;t sure if a path refers to a file or directory,
+  you should first check if it exists. The `exists` methods make a `HEAD` request that check the `X-Data-Type` response header.
+</aside>
+
+<h5 id="response">Response</h5>
+
+<p>Upon 200 success, response body is the content of the file.</p>
+
+<p><strong>Response Headers:</strong></p>
+
+<p><code class="prettyprint">X-Data-Type: file</code></p>
+
+<h3 id="check-if-file-exists">Check if file exists</h3>
+
+<blockquote>
+<p>Checking if a file exists:</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -I -H <span class="s1">'Authorization: Simple YOUR_API_KEY'</span> <span class="se">\</span>
+    https://api.algorithmia.com/v1/connector/data/.my/robots/HAL9000.png
+
+-&gt;
+HTTP/1.1 200 OK
+Content-Length: 0
+ETag: d41d8cd98f00b204e9800998ecf8427e
+Strict-Transport-Security: max-age<span class="o">=</span>0; includeSubDomains; preload
+X-Data-Type: file
+X-Frame-Options: DENY
+Connection: keep-alive
+</code></pre>
+<pre class="highlight python"><code><span class="k">if</span> <span class="n">client</span><span class="o">.</span><span class="nb">file</span><span class="p">(</span><span class="s">"data://.my/robots/T-800.png"</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"HAL 9000 exists"</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight r"><code><span class="k">if</span> <span class="p">(</span><span class="n">client</span><span class="o">$</span><span class="n">file</span><span class="p">(</span><span class="s2">"data://.my/robots/T-800.png"</span><span class="p">)</span><span class="o">$</span><span class="n">exists</span><span class="p">()){</span>
+    <span class="n">print</span><span class="p">(</span><span class="s2">"HAL 9000 exists"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+<pre class="highlight ruby"><code><span class="k">if</span> <span class="n">client</span><span class="p">.</span><span class="nf">file</span><span class="p">(</span><span class="s2">"data://.my/robots/T-800.png"</span><span class="p">).</span><span class="nf">exists?</span>
+    <span class="nb">puts</span> <span class="s2">"HAL 9000 exists"</span>
+</code></pre>
+<pre class="highlight java"><code><span class="k">if</span><span class="o">(</span><span class="n">client</span><span class="o">.</span><span class="na">file</span><span class="o">(</span><span class="s">"data://.my/robots/HAL_9000.png"</span><span class="o">).</span><span class="na">exists</span><span class="o">()){</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"HAL 9000 exists"</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre>
+<pre class="highlight scala"><code><span class="k">if</span><span class="o">(</span><span class="n">client</span><span class="o">.</span><span class="n">file</span><span class="o">(</span><span class="s">"data://.my/robots/HAL_9000.png"</span><span class="o">).</span><span class="n">exists</span><span class="o">()){</span>
+    <span class="nc">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="o">(</span><span class="s">"HAL 9000 exists"</span><span class="o">)</span>
+<span class="o">}</span>
+</code></pre>
+<pre class="highlight rust"><code><span class="k">if</span> <span class="n">client</span><span class="nf">.file</span><span class="p">(</span><span class="s">"data://.my/robots/HAL_9000.png"</span><span class="p">)</span><span class="nf">.exists</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"HAL 9000 exists"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+<pre class="highlight nodejs"><code><span class="kd">var</span> <span class="nx">hal</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">file</span><span class="p">(</span><span class="s2">"data://.my/robots/HAL_9000.png"</span><span class="p">);</span>
+
+<span class="nx">hal</span><span class="p">.</span><span class="nx">exists</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">exists</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">exists</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"HAL 9000 exists"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre>
+
+<p>To check if a file exists without downloading it, use the following endpoint:</p>
+
+<p><code class="prettyprint">HEAD https://api.algorithmia.com/v1/connector/:connector/*path</code></p>
+
+<ul>
+<li><code class="prettyprint">:connector</code> is the data source: <code class="prettyprint">data</code>, <code class="prettyprint">dropbox</code>, <code class="prettyprint">s3</code>, or a labeled variant (e.g. <code class="prettyprint">dropbox+mylabel</code>).</li>
+<li><code class="prettyprint">*path</code> is relative to the root of a given data source.</li>
+</ul>
+
+<aside class="notice">
+  Each client SDK provides one or more methods for downloading a file using its <a href="#data-uri">Data URI</a>.
+  In general, these clients make it easy retrieve into common data structure ranging from strings, to byte streams, to temporary files.
+  See the language-specific examples to the right.
+</aside>
+
+<aside class="warning">
+  This endpoint overlaps with the endpoint for checking if a directory exists. Verify the `X-Data-Type` response header on success.
+  The client SDKs will verify this automatically.
+</aside>
+
+<h5 id="response">Response</h5>
+
+<p>200 success indicates the file exists</p>
+
+<p><strong>Response Headers:</strong></p>
+
+<ul>
+<li><code class="prettyprint">X-Data-Type: file</code></li>
+<li><code class="prettyprint">X-Error-Message: &lt;Error message if error occurs&gt;</code></li>
+</ul>
+
+<h3 id="upload-a-file">Upload a file</h3>
+
+<blockquote>
+<p>Uploading a file:</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="c"># Write a text file</span>
+curl -X PUT -H <span class="s1">'Authorization: Simple YOUR_API_KEY'</span> <span class="se">\</span>
+    -d <span class="s1">'Leader of the Autobots'</span> <span class="se">\</span>
+    https://api.algorithmia.com/v1/connector/data/.my/robots/Optimus_Prime.txt
+
+<span class="gp">-&gt; </span><span class="o">{</span> <span class="s2">"result"</span>: <span class="s2">"data://.my/robots/Optimus_Prime.txt"</span> <span class="o">}</span>
+
+<span class="c"># Upload local file</span>
+curl -X PUT -H <span class="s1">'Authorization: Simple YOUR_API_KEY'</span> <span class="se">\</span>
+    --data-binary @Optimus_Prime.png <span class="se">\</span>
+    https://api.algorithmia.com/v1/connector/data/.my/robots/Optimus_Prime.png
+
+<span class="gp">-&gt; </span><span class="o">{</span> <span class="s2">"result"</span>: <span class="s2">"data://.my/robots/Optimus_Prime.png"</span> <span class="o">}</span>
+</code></pre>
+<pre class="highlight cli"><code><span class="c"># Upload files with 'algo cp'</span>
+<span class="gp">$ </span>algo cp Optimus_Prime.png data://.my/robots
+Uploaded data://.my/robots/Optimus_Prime.png
+Finished uploading 1 file<span class="o">(</span>s<span class="o">)</span>
+</code></pre>
+<pre class="highlight python"><code><span class="c"># Upload local file</span>
+<span class="n">client</span><span class="o">.</span><span class="nb">file</span><span class="p">(</span><span class="s">"data://.my/robots/Optimus_Prime.png"</span><span class="p">)</span><span class="o">.</span><span class="n">putFile</span><span class="p">(</span><span class="s">"/path/to/Optimus_Prime.png"</span><span class="p">)</span>
+<span class="c"># Write a text file</span>
+<span class="n">client</span><span class="o">.</span><span class="nb">file</span><span class="p">(</span><span class="s">"data://.my/robots/Optimus_Prime.txt"</span><span class="p">)</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s">"Leader of the Autobots"</span><span class="p">)</span>
+<span class="c"># Write a dict to a JSON file</span>
+<span class="n">client</span><span class="o">.</span><span class="nb">file</span><span class="p">(</span><span class="s">"data://.my/robots/Optimus_Prime.json"</span><span class="p">)</span><span class="o">.</span><span class="n">putJson</span><span class="p">({</span><span class="s">"faction"</span><span class="p">:</span> <span class="s">"Autobots"</span><span class="p">})</span>
+</code></pre>
+<pre class="highlight r"><code><span class="c1"># Upload local file
+</span><span class="n">client</span><span class="o">$</span><span class="n">file</span><span class="p">(</span><span class="s2">"data://.my/robots/Optimus_Prime.png"</span><span class="p">)</span><span class="o">$</span><span class="n">putFile</span><span class="p">(</span><span class="s2">"/path/to/Optimus_Prime.png"</span><span class="p">)</span>
+<span class="c1"># Write a text file
+</span><span class="n">client</span><span class="o">$</span><span class="n">file</span><span class="p">(</span><span class="s2">"data://.my/robots/Optimus_Prime.txt"</span><span class="p">)</span><span class="o">$</span><span class="n">put</span><span class="p">(</span><span class="s2">"Leader of the Autobots"</span><span class="p">)</span>
+<span class="c1"># Write a list to a JSON file
+</span><span class="n">client</span><span class="o">$</span><span class="n">file</span><span class="p">(</span><span class="s2">"data://.my/robots/Optimus_Prime.json"</span><span class="p">)</span><span class="o">$</span><span class="n">putJson</span><span class="p">(</span><span class="n">list</span><span class="p">(</span><span class="n">faction</span><span class="o">=</span><span class="s2">"Autobots"</span><span class="p">))</span>
+</code></pre>
+<pre class="highlight ruby"><code><span class="n">robots</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">dir</span><span class="p">(</span><span class="s2">"data://.my/robots"</span><span class="p">)</span>
+
+<span class="c1"># Upload local file</span>
+<span class="n">robots</span><span class="p">.</span><span class="nf">put_file</span><span class="p">(</span><span class="s2">"/path/to/Optimus_Prime.png"</span><span class="p">)</span>
+<span class="c1"># Write a text file</span>
+<span class="n">robots</span><span class="p">.</span><span class="nf">file</span><span class="p">(</span><span class="s2">"Optimus_Prime.txt"</span><span class="p">).</span><span class="nf">put</span><span class="p">(</span><span class="s2">"Leader of the Autobots"</span><span class="p">)</span>
+<span class="c1"># Write a binary file</span>
+<span class="n">robots</span><span class="p">.</span><span class="nf">file</span><span class="p">(</span><span class="s2">"Optimus_Prime.key"</span><span class="p">).</span><span class="nf">put</span><span class="p">([</span><span class="mi">71</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">107</span><span class="p">].</span><span class="nf">pack</span><span class="p">(</span><span class="s1">'C*'</span><span class="p">))</span>
+</code></pre>
+<pre class="highlight java"><code><span class="n">DataDirectory</span> <span class="n">robots</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">dir</span><span class="o">(</span><span class="s">"data://.my/robots"</span><span class="o">);</span>
+
+<span class="c1">// Upload local file</span>
+<span class="n">robots</span><span class="o">.</span><span class="na">putFile</span><span class="o">(</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"/path/to/Optimus_Prime.png"</span><span class="o">));</span>
+<span class="c1">// Write a text file</span>
+<span class="n">robots</span><span class="o">.</span><span class="na">file</span><span class="o">(</span><span class="s">"Optimus_Prime.txt"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="s">"Leader of the Autobots"</span><span class="o">);</span>
+<span class="c1">// Write a binary file</span>
+<span class="n">robots</span><span class="o">.</span><span class="na">file</span><span class="o">(</span><span class="s">"Optimus_Prime.key"</span><span class="o">).</span><span class="na">put</span><span class="o">(</span><span class="k">new</span> <span class="kt">byte</span><span class="o">[]</span> <span class="o">{</span> <span class="o">(</span><span class="kt">byte</span><span class="o">)</span><span class="mh">0xe0</span><span class="o">,</span> <span class="mh">0x4f</span><span class="o">,</span> <span class="o">(</span><span class="kt">byte</span><span class="o">)</span><span class="mh">0xd0</span><span class="o">,</span> <span class="mh">0x20</span> <span class="o">});</span>
+</code></pre>
+<pre class="highlight scala"><code><span class="k">val</span> <span class="n">robots</span> <span class="k">=</span> <span class="n">client</span><span class="o">.</span><span class="n">dir</span><span class="o">(</span><span class="s">"data://.my/robots"</span><span class="o">)</span>
+
+<span class="c1">// Upload local file
+</span><span class="n">robots</span><span class="o">.</span><span class="n">putFile</span><span class="o">(</span><span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"/path/to/Optimus_Prime.png"</span><span class="o">))</span>
+<span class="c1">// Write a text file
+</span><span class="n">robots</span><span class="o">.</span><span class="n">file</span><span class="o">(</span><span class="s">"Optimus_Prime.txt"</span><span class="o">).</span><span class="n">put</span><span class="o">(</span><span class="s">"Leader of the Autobots"</span><span class="o">)</span>
+<span class="c1">// Write a binary file
+</span><span class="n">robots</span><span class="o">.</span><span class="n">file</span><span class="o">(</span><span class="s">"Optimus_Prime.key"</span><span class="o">).</span><span class="n">put</span><span class="o">(</span><span class="k">new</span> <span class="n">byte</span><span class="o">[]</span> <span class="o">{</span> <span class="o">(</span><span class="n">byte</span><span class="o">)</span><span class="mh">0xe0</span><span class="o">,</span> <span class="mh">0x4f</span><span class="o">,</span> <span class="o">(</span><span class="n">byte</span><span class="o">)</span><span class="mh">0xd0</span><span class="o">,</span> <span class="mh">0x20</span> <span class="o">})</span>
+</code></pre>
+<pre class="highlight rust"><code><span class="k">let</span> <span class="n">robots</span> <span class="o">=</span> <span class="n">client</span><span class="nf">.dir</span><span class="p">(</span><span class="s">"data://.my/robots"</span><span class="p">);</span>
+
+<span class="c">// Upload local file</span>
+<span class="n">robots</span><span class="nf">.put_file</span><span class="p">(</span><span class="s">"/path/to/Optimus_Prime.png"</span><span class="p">);</span>
+<span class="c">// Write a text file</span>
+<span class="n">robots</span><span class="py">.child</span><span class="p">::</span><span class="o">&lt;</span><span class="n">DataFile</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"Optimus_Prime.txt"</span><span class="p">)</span><span class="nf">.put</span><span class="p">(</span><span class="s">"Leader of the Autobots"</span><span class="p">);</span>
+<span class="c">// Write a binary file</span>
+<span class="n">robots</span><span class="py">.child</span><span class="p">::</span><span class="o">&lt;</span><span class="n">DataFile</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"Optimus_Prime.key"</span><span class="p">)</span><span class="nf">.put</span><span class="p">(</span><span class="n">b</span><span class="s">"transform"</span><span class="p">);</span>
+</code></pre>
+<pre class="highlight nodejs"><code><span class="kd">var</span> <span class="nx">robots</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">dir</span><span class="p">(</span><span class="s2">"data://.my/robots"</span><span class="p">);</span>
+
+<span class="c1">// Upload a file from a local path</span>
+<span class="nx">robots</span><span class="p">.</span><span class="nx">putFile</span><span class="p">(</span><span class="s2">"/path/to/Optimus_Prime.jpg"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Error: "</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Success"</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// Write string or Buffer to a file</span>
+<span class="nx">robots</span><span class="p">.</span><span class="nx">file</span><span class="p">(</span><span class="s2">"Optimus_Prime.txt"</span><span class="p">).</span><span class="nx">put</span><span class="p">(</span><span class="s2">"Leader of the Autobots"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cm">/* check for error or success */</span>
+<span class="p">);</span>
+</code></pre>
+
+<p>To upload a file through the Algorithmia Data API, use the following endpoint:</p>
+
+<p><code class="prettyprint">PUT https://api.algorithmia.com/v1/connector/data/:owner/*path</code></p>
+
+<ul>
+<li><code class="prettyprint">:connector</code> is the data source: <code class="prettyprint">data</code>, <code class="prettyprint">dropbox</code>, <code class="prettyprint">s3</code>, or a labeled variant (e.g. <code class="prettyprint">dropbox+mylabel</code>).</li>
+<li><code class="prettyprint">*path</code> is relative to the root of a given data source.</li>
+</ul>
+
+<aside class="notice">
+  Each client SDK provides one or more methods for uploading a file using its <a href="#data-uri">Data URI</a>.
+  In general, these clients make it easy upload data from common data structures ranging from strings, to byte streams, to files.
+  See the language-specific examples to the right.
+</aside>
+
+<aside class="warning">
+  This endpoint will replace a file if it already exists.
+  If you wish to avoid replacing a file, <a href="#check-if-file-exists">check if the file exists</a> before using this endpoint.
+</aside>
+
+<h5 id="input">Input</h5>
+
+<p>Body of the request is the content of the file that will be created.</p>
+
+<h5 id="response">Response</h5>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>result</td>
+<td>The full Data URI of resulting file</td>
+</tr>
+</tbody></table>
+
+<h3 id="deleting-a-file">Deleting a file</h3>
+
+<blockquote>
+<p>Deleting a file:</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X DELETE -H <span class="s1">'Authorization: Simple YOUR_API_KEY'</span> <span class="se">\</span>
+    https://api.algorithmia.com/v1/connector/data/.my/robots/C-3PO.txt
+
+<span class="gp">-&gt; </span><span class="o">{</span> <span class="s2">"result"</span>: <span class="o">{</span> <span class="s2">"deleted"</span>: 1 <span class="o">}}</span>
+</code></pre>
+<pre class="highlight cli"><code><span class="gp">$ </span>algo rm data://.my/robots/C-3PO.txt
+Deleted file data://.my/robots/C-3PO.txt
+</code></pre>
+<pre class="highlight python"><code><span class="n">c3po</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="nb">file</span><span class="p">(</span><span class="s">"data://.my/robots/C-3PO.txt"</span><span class="p">)</span>
+<span class="n">c3po</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight r"><code><span class="n">c3po</span> <span class="o">&lt;-</span> <span class="n">client</span><span class="o">$</span><span class="n">file</span><span class="p">(</span><span class="s2">"data://.my/robots/C-3PO.txt"</span><span class="p">)</span>
+<span class="n">c3po</span><span class="o">$</span><span class="n">delete</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight ruby"><code><span class="n">c3po</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">file</span><span class="p">(</span><span class="s2">"data://.my/robots/C-3PO.txt"</span><span class="p">)</span>
+<span class="n">c3po</span><span class="p">.</span><span class="nf">delete</span>
+</code></pre>
+<pre class="highlight java"><code><span class="n">DataFile</span> <span class="n">c3po</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">file</span><span class="o">(</span><span class="s">"data://.my/robots/C-3PO.txt"</span><span class="o">)</span>
+<span class="n">c3po</span><span class="o">.</span><span class="na">delete</span><span class="o">();</span>
+</code></pre>
+<pre class="highlight scala"><code><span class="k">val</span> <span class="n">c3po</span> <span class="k">=</span> <span class="n">client</span><span class="o">.</span><span class="n">file</span><span class="o">(</span><span class="s">"data://.my/robots/C-3PO.txt"</span><span class="o">)</span>
+<span class="n">c3po</span><span class="o">.</span><span class="n">delete</span><span class="o">()</span>
+</code></pre>
+<pre class="highlight rust"><code><span class="k">let</span> <span class="n">c3po</span> <span class="o">=</span> <span class="n">client</span><span class="nf">.file</span><span class="p">(</span><span class="s">"data://.my/robots/C-3PO.txt"</span><span class="p">);</span>
+<span class="n">c3po</span><span class="nf">.delete</span><span class="p">();</span>
+</code></pre>
+<pre class="highlight nodejs"><code><span class="kd">var</span> <span class="nx">c3po</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">file</span><span class="p">(</span><span class="s2">"data://.my/robots/C-3PO.txt"</span><span class="p">);</span>
+<span class="nx">c3po</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Failed to delete file: "</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Deleted file: "</span> <span class="o">+</span> <span class="nx">c3po</span><span class="p">.</span><span class="nx">data_path</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre>
+
+<p>To delete a file through the Algorithmia Data API, use the following endpoint:</p>
+
+<p><code class="prettyprint">DELETE https://api.algorithmia.com/v1/connector/data/*path</code></p>
+
+<ul>
+<li><code class="prettyprint">:connector</code> is the data source: <code class="prettyprint">data</code>, <code class="prettyprint">dropbox</code>, <code class="prettyprint">s3</code>, or a labeled variant (e.g. <code class="prettyprint">dropbox+mylabel</code>).</li>
+<li><code class="prettyprint">*path</code> is relative to the root of a given data source.</li>
+</ul>
+
+<aside class="notice">
+  Each client SDK provides a method for deleting a file using its <a href="#data-uri">Data URI</a>.
+  See the language-specific examples to the right.
+</aside>
+
+<h5 id="response">Response</h5>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>result.deleted</td>
+<td>The number of files successfully deleted</td>
+</tr>
+<tr>
+<td>error.deleted</td>
+<td>The number of files successfully deleted if an error encountered during deletion</td>
+</tr>
+</tbody></table>
+
+<h1 id="api-versioning">API Versioning</h1>
+
+<p>Algorithmia API is versioned with the version specified on the URL route:</p>
+
+<p><code class="prettyprint">[ANY] api.algorithmia.com/:version/:route</code></p>
+
+<p>The current supported API version is <code class="prettyprint">v1</code> (i.e. <code class="prettyprint">api.algorithmia.com/v1/:route</code>)</p>
+
+<h5 id="deprecated-versions">Deprecated Versions</h5>
+
+<p>Algorithm API calls defined with unversioned routes are deprecated. Planned support for them ended 2015-12-31.</p>
+
+<p>Unversioned routes are routes that use the following format:</p>
+
+<p><code class="prettyprint">[ANY] api.algorithmia.com/api/:route</code></p>
+
+<p><code class="prettyprint">[ANY] api.algorithmia.com/data/:route</code></p>
+
+          <h1 id="clients">Clients</h1>
+
+<p>Algorithmia clients are available as libraries for you to use inside your project.
+In addition to browsing the API specification to see language-specific usage for each API endpoint,
+client-specific guides are located in the <a href="http://developers.algorithmia.com">Algorithmia Developer Center</a>.</p>
+
+<p>This table provides links to various resources for each client:</p>
+
+<table><thead>
+<tr>
+<th>Client</th>
+<th>DevCenter Guide</th>
+<th>GitHub Repo</th>
+<th>Language Docs</th>
+<th>Package</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cURL</td>
+<td><a href="http://developers.algorithmia.com/application-development/client-guides/curl">Guide</a></td>
+<td>n/a</td>
+<td>n/a</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>CLI</td>
+<td><a href="http://developers.algorithmia.com/application-development/client-guides/cli">Guide</a></td>
+<td><a href="https://github.com/algorithmiaio/algorithmia-cli">algorithmia-cli</a></td>
+<td>n/a</td>
+<td><a href="https://github.com/algorithmiaio/algorithmia-cli/releases">Download</a></td>
+</tr>
+<tr>
+<td>Java</td>
+<td><a href="http://developers.algorithmia.com/application-development/client-guides/java">Guide</a></td>
+<td><a href="https://github.com/algorithmiaio/algorithmia-java">algorithmia-java</a></td>
+<td><a href="http://www.javadoc.io/doc/com.algorithmia/algorithmia-client">Java Docs</a></td>
+<td><a href="http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.algorithmia%22%20AND%20a%3A%22algorithmia-client%22">Maven</a></td>
+</tr>
+<tr>
+<td>JavaScript</td>
+<td><a href="http://developers.algorithmia.com/application-development/client-guides/javascript">Guide</a></td>
+<td>n/a</td>
+<td>n/a</td>
+<td><a href="https://algorithmia.com/v1/clients/js/algorithmia-0.2.0.js">Download</a></td>
+</tr>
+<tr>
+<td>NodeJS</td>
+<td><a href="http://developers.algorithmia.com/application-development/client-guides/node">Guide</a></td>
+<td><a href="https://github.com/algorithmiaio/algorithmia-nodejs">algorithmia-nodejs</a></td>
+<td>n/a</td>
+<td><a href="https://www.npmjs.com/package/algorithmia">NPM</a></td>
+</tr>
+<tr>
+<td>Python</td>
+<td><a href="http://developers.algorithmia.com/application-development/client-guides/python">Guide</a></td>
+<td><a href="https://github.com/algorithmiaio/algorithmia-python">algorithmia-python</a></td>
+<td>n/a</td>
+<td><a href="https://pypi.python.org/pypi/algorithmia">PyPi</a></td>
+</tr>
+<tr>
+<td>R</td>
+<td><a href="http://developers.algorithmia.com/application-development/client-guides/r">Guide</a></td>
+<td><a href="https://github.com/algorithmiaio/algorithmia-r">algorithmia-r</a></td>
+<td><a href="https://cran.r-project.org/web/packages/algorithmia/algorithmia.pdf">R Docs</a></td>
+<td><a href="https://cran.r-project.org/web/packages/algorithmia/index.html">Cran</a></td>
+</tr>
+<tr>
+<td>Ruby</td>
+<td><a href="http://developers.algorithmia.com/application-development/client-guides/ruby">Guide</a></td>
+<td><a href="https://github.com/algorithmiaio/algorithmia-ruby">algorithmia-ruby</a></td>
+<td>n/a</td>
+<td><a href="https://rubygems.org/gems/algorithmia">RubyGems</a></td>
+</tr>
+<tr>
+<td>Rust</td>
+<td><a href="http://developers.algorithmia.com/application-development/client-guides/rust">Guide</a></td>
+<td><a href="https://github.com/algorithmiaio/algorithmia-rust">algorithmia-rust</a></td>
+<td><a href="http://algorithmiaio.github.io/algorithmia-rust/algorithmia/">Cargo Docs</a></td>
+<td></td>
+</tr>
+<tr>
+<td>Scala</td>
+<td><a href="http://developers.algorithmia.com/application-development/client-guides/scala">Guide</a></td>
+<td><a href="https://github.com/algorithmiaio/algorithmia-java">algorithmia-java</a></td>
+<td><a href="http://www.javadoc.io/doc/com.algorithmia/algorithmia-client">Java Docs</a></td>
+<td><a href="http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.algorithmia%22%20AND%20a%3A%22algorithmia-client%22">Maven</a></td>
+</tr>
+<tr>
+<td>AWS Lambda</td>
+<td><a href="http://developers.algorithmia.com/application-development/client-guides/aws-lambda">Guide</a></td>
+<td><a href="https://github.com/algorithmiaio/algorithmia-nodejs/tree/master/contrib/lambda">algorithmia-nodejs</a></td>
+<td>n/a</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>Swift</td>
+<td><a href="http://developers.algorithmia.com/application-development/client-guides/swift">Guide</a></td>
+<td><a href="https://github.com/algorithmiaio/algorithmia-swift">algorithmia-swift</a></td>
+<td><a href="http://cocoadocs.org/docsets/algorithmia/0.1.2/">Cocoa Pod Docs</a></td>
+<td></td>
+</tr>
+<tr>
+<td>Go</td>
+<td><a href="http://developers.algorithmia.com/application-development/client-guides/go">Guide</a></td>
+<td><a href="https://github.com/algorithmiaio/algorithmia-go">algorithmia-go</a></td>
+<td><a href="https://godoc.org/github.com/algorithmiaio/algorithmia-go">Go Docs</a></td>
+<td></td>
+</tr>
+</tbody></table>
+
+          <h1 id="algorithm-development">Algorithm Development</h1>
+
+<p>As an Algorithmia user, in addition to having access to hundreds of algorithms, you also have the ability to add your own algorithms. You can write a private algorithm for your own use, contribute an open source algorithm, or monetize an algorithm you authored. Our algorithms and platform are designed with composability in mind, so think of algorithms in the marketplace as building blocks.</p>
+
+<p>We currently support algorithm development in:</p>
+
+<ul>
+<li><a href="http://developers.algorithmia.com/algorithm-development/guides/java-guide/">Java</a></li>
+<li><a href="http://developers.algorithmia.com/algorithm-development/guides/javascript-guide/">JavaScript</a></li>
+<li><a href="http://developers.algorithmia.com/algorithm-development/guides/python-guide/">Python</a></li>
+<li><a href="http://developers.algorithmia.com/algorithm-development/client-guides/r">R</a></li>
+<li><a href="http://developers.algorithmia.com/algorithm-development/guides/ruby-guide/">Ruby</a></li>
+<li><a href="http://developers.algorithmia.com/algorithm-development/guides/rust-guide//">Rust</a></li>
+<li><a href="http://developers.algorithmia.com/algorithm-development/guides/scala-guide/">Scala</a></li>
+</ul>
+
+          <h1 id="need-help">Need Help?</h1>
+
+<p>We&rsquo;re here to help you! If you are just getting started with Algorithmia, be sure to check out the guides and tutorials in the <a href="http://developers.algorithmia.com/">Algorithmia Developer Center</a>.</p>
+
+<p>This documentation is intended to help you integrate Algorithmia into your project or app, so if you haven&rsquo;t found the answer to your question please reach out. We&rsquo;d love to help you get up and running as soon as possible! We&rsquo;re here to answer any question you might have, from pricing to troubleshooting to helping you publish an algorithm.</p>
+
+<p>For any wrapper or library related issue, please open an issue on the dedicated GitHub repository.</p>
+
+<h2 id="connect-with-us">Connect with us</h2>
+
+<ul>
+<li>Follow us on <a href="https://twitter.com/algorithmia">Twitter</a>!</li>
+<li>Check out the <a href="http://blog.algorithmia.com/">Algorithmia blog</a> to stay up-to-date with new features and resources for using Algorithmia.</li>
+<li>Send us a quick message by clicking the &rsquo;?&rsquo; in the bottom right of your browser on the Algorithmia site.</li>
+<li>Shoot us an email at <a href="mailto:support@algorithmia.com">support@algorithmia.com</a>.</li>
+</ul>
+
+<h2 id="contribute-to-the-docs">Contribute to the docs</h2>
+
+<p>You can find the source code of this documentation as well as file issues on the <a href="https://github.com/algorithmiaio/api-docs">repository</a>.</p>
+
+<p>Please contribute if you come across any errors or are having trouble understanding any of the information in these docs and guides. Your help improving the API documentation is much appreciated!</p>
+
+<p><br>
+ <br></p>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="shell">cURL</a>
+                <a href="#" data-language-name="cli">CLI</a>
+                <a href="#" data-language-name="python">python</a>
+                <a href="#" data-language-name="java">java</a>
+                <a href="#" data-language-name="scala">scala</a>
+                <a href="#" data-language-name="javascript">javascript</a>
+                <a href="#" data-language-name="nodejs">nodejs</a>
+                <a href="#" data-language-name="ruby">ruby</a>
+                <a href="#" data-language-name="rust">rust</a>
+                <a href="#" data-language-name="r">r</a>
+          </div>
+      </div>
+    </div>
+  </body>
+
+</html>
